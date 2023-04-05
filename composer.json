@@ -19,9 +19,13 @@
         "drupal/core-composer-scaffold": "^10.0",
         "drupal/core-project-message": "^10.0",
         "drupal/core-recommended": "^10.0",
+<<<<<<< HEAD
         "drupal/migrate_plus": "6.0",
         "drupal/migrate_tools": "6.0",
         "drupal/vani": "10.0"
+=======
+        "drupal/vani": "^10.0"
+>>>>>>> 7882e3a82adaf271b8513340c49ff4f9351d7fb1
     },
     "conflict": {
         "drupal/drupal": "*"
