@@ -122,12 +122,12 @@ class Select extends Query implements SelectInterface {
   /**
    * The query metadata for alter purposes.
    */
-  public array $alterMetaData;
+  public $alterMetaData;
 
   /**
    * The query tags.
    */
-  public array $alterTags;
+  public $alterTags;
 
   /**
    * Constructs a Select object.

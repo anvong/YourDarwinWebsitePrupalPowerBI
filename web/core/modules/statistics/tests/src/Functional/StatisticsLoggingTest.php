@@ -54,7 +54,7 @@ class StatisticsLoggingTest extends BrowserTestBase {
    *
    * @var \Drupal\node\Entity\Node
    */
-  protected Node $node;
+  protected $node;
 
   /**
    * {@inheritdoc}

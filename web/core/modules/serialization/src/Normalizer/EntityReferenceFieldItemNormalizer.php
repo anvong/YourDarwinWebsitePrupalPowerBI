@@ -40,7 +40,7 @@ class EntityReferenceFieldItemNormalizer extends FieldItemNormalizer {
   /**
    * {@inheritdoc}
    */
-  public function normalize($field_item, $format = NULL, array $context = []): array|string|int|float|bool|\ArrayObject|NULL {
+  public function normalize($field_item, $format = NULL, array $context = []) {
     $values = parent::normalize($field_item, $format, $context);
 
     $this->normalizeRootReferenceValue($values, $field_item);

@@ -3,6 +3,8 @@
  * Styles for Tour theme.
  */
 
+@import "../base/variables.pcss.css";
+
 /* Default styles for the container */
 .shepherd-element {
   color: #fff;

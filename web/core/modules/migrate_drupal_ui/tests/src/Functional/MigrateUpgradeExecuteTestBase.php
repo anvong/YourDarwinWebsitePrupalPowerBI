@@ -14,7 +14,7 @@ abstract class MigrateUpgradeExecuteTestBase extends MigrateUpgradeTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     // Create content.

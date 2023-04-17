@@ -49,12 +49,12 @@ abstract class DateTimeHandlerTestBase extends ViewsKernelTestBase {
    *
    * @var string[]
    */
-  protected array $map;
+  protected $map;
 
   /**
    * {@inheritdoc}
    */
-  protected function setUp($import_test_views = TRUE): void {
+  protected function setUp($import_test_views = TRUE) {
     parent::setUp($import_test_views);
 
     $this->installSchema('node', 'node_access');

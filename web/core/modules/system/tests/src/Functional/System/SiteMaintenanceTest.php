@@ -5,7 +5,6 @@ namespace Drupal\Tests\system\Functional\System;
 use Drupal\Core\Test\AssertMailTrait;
 use Drupal\Core\Url;
 use Drupal\Tests\BrowserTestBase;
-use Drupal\user\Entity\User;
 
 /**
  * Tests access to site while in maintenance mode.
@@ -37,7 +36,7 @@ class SiteMaintenanceTest extends BrowserTestBase {
    *
    * @var \Drupal\user\Entity\User
    */
-  protected User $user;
+  protected $user;
 
   /**
    * {@inheritdoc}

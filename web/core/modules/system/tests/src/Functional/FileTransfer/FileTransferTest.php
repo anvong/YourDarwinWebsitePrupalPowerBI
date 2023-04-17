@@ -13,6 +13,10 @@ use Drupal\Tests\BrowserTestBase;
  * @group FileTransfer
  */
 class FileTransferTest extends BrowserTestBase {
+  protected $hostname = 'localhost';
+  protected $username = 'drupal';
+  protected $password = 'password';
+  protected $port = '42';
 
   /**
    * {@inheritdoc}
@@ -22,14 +26,14 @@ class FileTransferTest extends BrowserTestBase {
   /**
    * @var \Drupal\Tests\system\Functional\FileTransfer\TestFileTransfer
    */
-  protected TestFileTransfer $testConnection;
+  protected $testConnection;
 
   /**
    * {@inheritdoc}
    */
   protected function setUp(): void {
     parent::setUp();
-    $this->testConnection = TestFileTransfer::factory($this->root, []);
+    $this->testConnection = TestFileTransfer::factory($this->root, ['hostname' => $this->hostname, 'username' => $this->username, 'password' => $this->password, 'port' => $this->port]);
   }
 
   public function _getFakeModuleFiles() {
@@ -53,7 +57,7 @@ class FileTransferTest extends BrowserTestBase {
       $output = [];
       exec('rm -Rf ' . escapeshellarg($location), $output, $ret);
       if ($ret != 0) {
-        throw new \Exception('Error removing fake module directory.');
+        throw new Exception('Error removing fake module directory.');
       }
     }
 

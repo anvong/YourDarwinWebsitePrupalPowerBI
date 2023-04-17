@@ -72,11 +72,6 @@ class FieldConfig extends FieldConfigBase implements FieldConfigInterface {
   protected $fieldStorage;
 
   /**
-   * The original FieldConfig entity.
-   */
-  public FieldConfig $original;
-
-  /**
    * Constructs a FieldConfig object.
    *
    * In most cases, Field entities are created via

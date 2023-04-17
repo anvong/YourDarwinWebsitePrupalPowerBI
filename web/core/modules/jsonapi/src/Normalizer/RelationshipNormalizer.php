@@ -20,7 +20,7 @@ class RelationshipNormalizer extends NormalizerBase {
   /**
    * {@inheritdoc}
    */
-  public function normalize($object, $format = NULL, array $context = []): array|string|int|float|bool|\ArrayObject|NULL {
+  public function normalize($object, $format = NULL, array $context = []) {
     assert($object instanceof Relationship);
     return CacheableNormalization::aggregate([
       'data' => $this->serializer->normalize($object->getData(), $format, $context),

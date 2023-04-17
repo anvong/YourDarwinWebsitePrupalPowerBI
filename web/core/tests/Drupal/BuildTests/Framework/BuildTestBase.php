@@ -147,12 +147,12 @@ abstract class BuildTestBase extends TestCase {
    *
    * @var \Symfony\Component\Process\PhpExecutableFinder
    */
-  private PhpExecutableFinder $phpFinder;
+  private $phpFinder;
 
   /**
    * {@inheritdoc}
    */
-  public static function setUpBeforeClass(): void {
+  public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
     static::checkClassCommandRequirements();
   }
@@ -160,7 +160,7 @@ abstract class BuildTestBase extends TestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     static::checkMethodCommandRequirements($this->getName());
     $this->phpFinder = new PhpExecutableFinder();
@@ -176,7 +176,7 @@ abstract class BuildTestBase extends TestCase {
   /**
    * {@inheritdoc}
    */
-  protected function tearDown(): void {
+  protected function tearDown() {
     parent::tearDown();
 
     $this->stopServer();

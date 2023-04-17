@@ -141,7 +141,7 @@ class FinalExceptionSubscriber implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents(): array {
+  public static function getSubscribedEvents() {
     // Run as the final (very late) KernelEvents::EXCEPTION subscriber.
     $events[KernelEvents::EXCEPTION][] = ['onException', -256];
     return $events;

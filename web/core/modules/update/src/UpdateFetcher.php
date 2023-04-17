@@ -55,13 +55,17 @@ class UpdateFetcher implements UpdateFetcherInterface {
    *   The config factory.
    * @param \GuzzleHttp\ClientInterface $http_client
    *   A Guzzle client object.
-   * @param \Drupal\Core\Site\Settings $settings
+   * @param \Drupal\Core\Site\Settings|null $settings
    *   The settings instance.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, ClientInterface $http_client, Settings $settings) {
+  public function __construct(ConfigFactoryInterface $config_factory, ClientInterface $http_client, Settings $settings = NULL) {
     $this->fetchUrl = $config_factory->get('update.settings')->get('fetch.url');
     $this->httpClient = $http_client;
     $this->updateSettings = $config_factory->get('update.settings');
+    if (is_null($settings)) {
+      @trigger_error('The settings service should be passed to UpdateFetcher::__construct() since 9.1.0. This will be required in Drupal 10.0.0. See https://www.drupal.org/node/3179315', E_USER_DEPRECATED);
+      $settings = \Drupal::service('settings');
+    }
     $this->withHttpFallback = $settings->get('update_fetch_with_http_fallback', FALSE);
   }
 

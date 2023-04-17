@@ -22,7 +22,7 @@ class FieldItemNormalizer extends ComplexDataNormalizer implements DenormalizerI
   /**
    * {@inheritdoc}
    */
-  public function denormalize($data, $class, $format = NULL, array $context = []): mixed {
+  public function denormalize($data, $class, $format = NULL, array $context = []) {
     if (!isset($context['target_instance'])) {
       throw new InvalidArgumentException('$context[\'target_instance\'] must be set to denormalize with the FieldItemNormalizer');
     }

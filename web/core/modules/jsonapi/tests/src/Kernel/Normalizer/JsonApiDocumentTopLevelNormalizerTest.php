@@ -68,7 +68,7 @@ class JsonApiDocumentTopLevelNormalizerTest extends JsonapiKernelTestBase {
    *
    * @var \Drupal\node\Entity\NodeType
    */
-  protected NodeType $nodeType;
+  protected $nodeType;
 
   /**
    * A user to normalize.
@@ -82,28 +82,28 @@ class JsonApiDocumentTopLevelNormalizerTest extends JsonapiKernelTestBase {
    *
    * @var \Drupal\user\Entity\User
    */
-  protected User $user2;
+  protected $user2;
 
   /**
    * A vocabulary.
    *
    * @var \Drupal\taxonomy\Entity\Vocabulary
    */
-  protected Vocabulary $vocabulary;
+  protected $vocabulary;
 
   /**
    * A term.
    *
    * @var \Drupal\taxonomy\Entity\Term
    */
-  protected Term $term1;
+  protected $term1;
 
   /**
    * A term.
    *
    * @var \Drupal\taxonomy\Entity\Term
    */
-  protected Term $term2;
+  protected $term2;
 
   /**
    * The include resolver.
@@ -232,7 +232,7 @@ class JsonApiDocumentTopLevelNormalizerTest extends JsonapiKernelTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function tearDown(): void {
+  public function tearDown(): void {
     if ($this->node) {
       $this->node->delete();
     }

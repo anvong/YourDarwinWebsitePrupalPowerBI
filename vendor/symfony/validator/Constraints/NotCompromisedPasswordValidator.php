@@ -31,10 +31,10 @@ class NotCompromisedPasswordValidator extends ConstraintValidator
 {
     private const DEFAULT_API_ENDPOINT = 'https://api.pwnedpasswords.com/range/%s';
 
-    private HttpClientInterface $httpClient;
-    private string $charset;
-    private bool $enabled;
-    private string $endpoint;
+    private $httpClient;
+    private $charset;
+    private $enabled;
+    private $endpoint;
 
     public function __construct(HttpClientInterface $httpClient = null, string $charset = 'UTF-8', bool $enabled = true, string $endpoint = null)
     {
@@ -49,9 +49,11 @@ class NotCompromisedPasswordValidator extends ConstraintValidator
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @throws ExceptionInterface
      */
-    public function validate(mixed $value, Constraint $constraint)
+    public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof NotCompromisedPassword) {
             throw new UnexpectedTypeException($constraint, NotCompromisedPassword::class);
@@ -61,7 +63,7 @@ class NotCompromisedPasswordValidator extends ConstraintValidator
             return;
         }
 
-        if (null !== $value && !\is_scalar($value) && !$value instanceof \Stringable) {
+        if (null !== $value && !\is_scalar($value) && !(\is_object($value) && method_exists($value, '__toString'))) {
             throw new UnexpectedValueException($value, 'string');
         }
 
@@ -79,7 +81,7 @@ class NotCompromisedPasswordValidator extends ConstraintValidator
         $url = sprintf($this->endpoint, $hashPrefix);
 
         try {
-            $result = $this->httpClient->request('GET', $url, ['headers' => ['Add-Padding' => 'true']])->getContent();
+            $result = $this->httpClient->request('GET', $url)->getContent();
         } catch (ExceptionInterface $e) {
             if ($constraint->skipOnError) {
                 return;
@@ -89,10 +91,6 @@ class NotCompromisedPasswordValidator extends ConstraintValidator
         }
 
         foreach (explode("\r\n", $result) as $line) {
-            if (!str_contains($line, ':')) {
-                continue;
-            }
-
             [$hashSuffix, $count] = explode(':', $line);
 
             if ($hashPrefix.$hashSuffix === $hash && $constraint->threshold <= (int) $count) {

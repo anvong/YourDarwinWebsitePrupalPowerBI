@@ -106,7 +106,7 @@ class TwigEnvironmentTest extends KernelTestBase {
     $environment = \Drupal::service('twig');
 
     try {
-      $environment->load('this-template-does-not-exist.html.twig')->render([]);
+      $environment->loadTemplate('this-template-does-not-exist.html.twig')->render([]);
       $this->fail('Did not throw an exception as expected.');
     }
     catch (LoaderError $e) {

@@ -85,7 +85,7 @@ class SessionTest extends BrowserTestBase {
   public function testDataPersistence() {
     $user = $this->drupalCreateUser([]);
     // Enable sessions.
-    $this->sessionReset();
+    $this->sessionReset($user->id());
 
     $this->drupalLogin($user);
 
@@ -151,7 +151,7 @@ class SessionTest extends BrowserTestBase {
 
     // Login, the data should persist.
     $this->drupalLogin($user);
-    $this->sessionReset();
+    $this->sessionReset($user->id());
     // Verify that the session persists for an authenticated user after
     // logging out and then back in.
     $this->drupalGet('session-test/get');
@@ -159,7 +159,7 @@ class SessionTest extends BrowserTestBase {
 
     // Change session and create another user.
     $user2 = $this->drupalCreateUser([]);
-    $this->sessionReset();
+    $this->sessionReset($user2->id());
     $this->drupalLogin($user2);
   }
 
@@ -369,7 +369,7 @@ class SessionTest extends BrowserTestBase {
   }
 
   /**
-   * Assert whether the test browser sent a session cookie.
+   * Assert whether the SimpleTest browser sent a session cookie.
    *
    * @internal
    */

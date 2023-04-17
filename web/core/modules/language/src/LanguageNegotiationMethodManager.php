@@ -14,7 +14,7 @@ class LanguageNegotiationMethodManager extends DefaultPluginManager {
   /**
    * The cache key prefix.
    */
-  protected string $cacheKeyPrefix;
+  protected $cacheKeyPrefix;
 
   /**
    * Constructs a new LanguageNegotiationMethodManager object.

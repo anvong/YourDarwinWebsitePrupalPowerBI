@@ -1,6 +1,6 @@
 {
     "name": "drupal/recommended-project",
-    "description": "Project template for Drupal projects with a relocated document root",
+    "description": "Project template for Drupal 9 projects with a relocated document root",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "homepage": "https://www.drupal.org/project/drupal",
@@ -15,17 +15,17 @@
         }
     ],
     "require": {
-        "composer/installers": "^2.0",
-        "drupal/core-composer-scaffold": "^10.0",
-        "drupal/core-project-message": "^10.0",
-        "drupal/core-recommended": "^10.0",
-<<<<<<< HEAD
-        "drupal/migrate_plus": "6.0",
-        "drupal/migrate_tools": "6.0",
-        "drupal/vani": "10.0"
-=======
-        "drupal/vani": "^10.0"
->>>>>>> 7882e3a82adaf271b8513340c49ff4f9351d7fb1
+        "composer/installers": "^1.9",
+        "drupal/bootstrap_barrio": "^5.5",
+        "drupal/bootstrap_library": "^2.0",
+        "drupal/bootstrap_styles": "^1.1",
+        "drupal/core-composer-scaffold": "^9.5",
+        "drupal/core-project-message": "^9.5",
+        "drupal/core-recommended": "^9.5",
+        "drupal/ds": "3.15",
+        "drupal/field_group": "3.4",
+        "drupal/paragraphs": "1.15",
+        "drush/drush": "*"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -37,7 +37,6 @@
             "composer/installers": true,
             "drupal/core-composer-scaffold": true,
             "drupal/core-project-message": true,
-            "phpstan/extension-installer": true,
             "dealerdirect/phpcodesniffer-composer-installer": true
         },
         "sort-packages": true

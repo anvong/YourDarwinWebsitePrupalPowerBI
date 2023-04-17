@@ -542,7 +542,7 @@ class ConfigImporter {
     }
     elseif (is_callable($sync_step)) {
       \Drupal::service('config.installer')->setSyncing(TRUE);
-      $sync_step($context, $this);
+      call_user_func_array($sync_step, [&$context, $this]);
     }
     else {
       throw new \InvalidArgumentException('Invalid configuration synchronization step');

@@ -1,9 +1,11 @@
 /**
  * @file
- * Table select — replaces core implementation.
+ * Table select — replaces implementation of Classy theme.
  *
  * @see tableselect.js
  */
+
+@import "../base/variables.pcss.css";
 
 td.checkbox,
 th.checkbox {

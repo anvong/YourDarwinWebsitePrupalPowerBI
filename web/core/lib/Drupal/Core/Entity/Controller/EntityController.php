@@ -65,7 +65,7 @@ class EntityController implements ContainerInjectionInterface {
   /**
    * The url generator.
    */
-  protected UrlGeneratorInterface $urlGenerator;
+  protected $urlGenerator;
 
   /**
    * Constructs a new EntityController.

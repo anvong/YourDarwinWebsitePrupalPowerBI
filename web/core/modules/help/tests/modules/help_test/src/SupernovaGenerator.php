@@ -20,14 +20,14 @@ class SupernovaGenerator implements UrlGeneratorInterface {
   /**
    * {@inheritdoc}
    */
-  public function getContext(): RequestContext {
+  public function getContext() {
     throw new \Exception();
   }
 
   /**
    * {@inheritdoc}
    */
-  public function generate($name, $parameters = [], $referenceType = self::ABSOLUTE_PATH): string {
+  public function generate($name, $parameters = [], $referenceType = self::ABSOLUTE_PATH) {
     throw new \Exception();
   }
 

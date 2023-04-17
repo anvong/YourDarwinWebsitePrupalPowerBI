@@ -39,7 +39,7 @@ class TimestampNormalizer extends DateTimeNormalizer {
   /**
    * {@inheritdoc}
    */
-  public function denormalize($data, $class, $format = NULL, array $context = []): mixed {
+  public function denormalize($data, $class, $format = NULL, array $context = []) {
     $denormalized = parent::denormalize($data, $class, $format, $context);
     return $denormalized->getTimestamp();
   }

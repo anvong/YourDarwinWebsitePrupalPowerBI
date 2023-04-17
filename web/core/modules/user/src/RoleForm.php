@@ -42,7 +42,7 @@ class RoleForm extends EntityForm {
       '#value' => $entity->getWeight(),
     ];
 
-    return parent::form($form, $form_state);
+    return parent::form($form, $form_state, $entity);
   }
 
   /**

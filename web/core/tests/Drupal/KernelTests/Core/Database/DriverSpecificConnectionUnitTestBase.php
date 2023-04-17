@@ -2,7 +2,6 @@
 
 namespace Drupal\KernelTests\Core\Database;
 
-use Drupal\Core\Database\Connection;
 use Drupal\Core\Database\Database;
 
 /**
@@ -18,12 +17,12 @@ abstract class DriverSpecificConnectionUnitTestBase extends DriverSpecificKernel
   /**
    * A database connection used for monitoring processes.
    */
-  protected Connection $monitor;
+  protected $monitor;
 
   /**
    * The connection ID of the current test connection.
    */
-  protected int $id;
+  protected $id;
 
   /**
    * {@inheritdoc}

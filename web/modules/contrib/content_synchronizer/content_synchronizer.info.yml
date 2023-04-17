@@ -1,0 +1,11 @@
+name: Content Synchronizer
+type: module
+core_version_requirement: ^8.8 || ^9
+package: Development
+dependencies:
+  - drupal:file
+
+# Information added by Drupal.org packaging script on 2021-06-30
+version: '3.1.0'
+project: 'content_synchronizer'
+datestamp: 1625081442

@@ -1,75 +1,32 @@
-<img alt="Drupal Logo" src="https://www.drupal.org/files/Wordmark_blue_RGB.png" height="60px">
+Pre-requires:
 
-Drupal is an open source content management platform supporting a variety of
-websites ranging from personal weblogs to large community-driven websites. For
-more information, visit the Drupal website, [Drupal.org][Drupal.org], and join
-the [Drupal community][Drupal community].
+1. MySQL 8.0.31 or higher
+2. PHP 8.1.13 or higher
+3. Composer 2.1.14 or higher
+4. Drupal 9.5.5 or higher
 
-## Contributing
 
-Drupal is developed on [Drupal.org][Drupal.org], the home of the international
-Drupal community since 2001!
+## Installation
+1. Create database: yourdarwindb
+2. Import the database from the file: database_backup\yourdarwindb_NNN.sql (NNN is version note)
+3. Pull the source code - develop branch into wahtever folder you want
+4. Create a virtual host for the folder, for example: http://yourdarwindev.com. Then restart Wampp or Xampp
+6. Open the file: web\config\settings.local.php and change the database connection information to match your local environment
+7. At the root folder of the project, run the command: composer install to install all the dependencies
+8. Access  http://yourdarwindev.com on your browser
 
-[Drupal.org][Drupal.org] hosts Drupal's [GitLab repository][GitLab repository],
-its [issue queue][issue queue], and its [documentation][documentation]. Before
-you start working on code, be sure to search the [issue queue][issue queue] and
-create an issue if your aren't able to find an existing issue.
+## How to use drupal content creation with admin role
+1. Access  http://yourdarwindev.com/user/login on your browser
+2. Login with the account: admin/nimda@Cdu2023
+3. Create content by clicking on Content -> Add content -> Basic page (static page) or Article (blog post). You can set URL alias for the page, for example: /about-us for about us page
+4. Create menu by clicking on Structure -> Menu -> Add menu link. For example, you can create a menu link for the about us page with the title: About us
 
-Every issue on Drupal.org automatically creates a new community-accessible fork
-that you can contribute to. Learn more about the code contribution process on
-the [Issue forks & merge requests page][issue forks].
 
-## Usage
+## Clear cached data
 
-For a brief introduction, see [USAGE.txt](/core/USAGE.txt). You can also find
-guides, API references, and more by visiting Drupal's [documentation
-page][documentation].
+On admin page, go to Configuration -> Development -> Performance. Then click on the button: Clear all caches
 
-You can quickly extend Drupal's core feature set by installing any of its
-[thousands of free and open source modules][modules]. With Drupal and its
-module ecosystem, you can often build most or all of what your project needs
-before writing a single line of code.
 
-## Changelog
+## How to set a static page as home page
 
-Drupal keeps detailed [change records][changelog]. You can search Drupal's
-changes for a record of every notable breaking change and new feature since
-2011.
-
-## Security
-
-For a list of security announcements, see the [Security advisories
-page][Security advisories] (available as [an RSS feed][security RSS]). This
-page also describes how to subscribe to these announcements via email.
-
-For information about the Drupal security process, or to find out how to report
-a potential security issue to the Drupal security team, see the [Security team
-page][security team].
-
-## Need a helping hand?
-
-Visit the [Support page][support] or browse [over a thousand Drupal
-providers][service providers] offering design, strategy, development, and
-hosting services.
-
-## Legal matters
-
-Know your rights when using Drupal by reading Drupal core's
-[license](/core/LICENSE.txt).
-
-Learn about the [Drupal trademark and logo policy here][trademark].
-
-[Drupal.org]: https://www.drupal.org
-[Drupal community]: https://www.drupal.org/community
-[GitLab repository]: https://git.drupalcode.org/project/drupal
-[issue queue]: https://www.drupal.org/project/issues/drupal
-[issue forks]: https://www.drupal.org/drupalorg/docs/gitlab-integration/issue-forks-merge-requests
-[documentation]: https://www.drupal.org/documentation
-[changelog]: https://www.drupal.org/list-changes/drupal
-[modules]: https://www.drupal.org/project/project_module
-[security advisories]: https://www.drupal.org/security
-[security RSS]: https://www.drupal.org/security/rss.xml
-[security team]: https://www.drupal.org/drupal-security-team
-[service providers]: https://www.drupal.org/drupal-services
-[support]: https://www.drupal.org/support
-[trademark]: https://www.drupal.com/trademark
+On admin page, go to Configuration -> System -> Site information. Then set the Home page to the static page you want to set as home page. For example: /home

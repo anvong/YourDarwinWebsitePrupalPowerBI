@@ -128,7 +128,7 @@ class Container implements ContainerInterface, ResetInterface {
   /**
    * {@inheritdoc}
    */
-  public function get($id, $invalid_behavior = ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE): ?object {
+  public function get($id, $invalid_behavior = ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE) {
     if ($this->hasParameter('_deprecated_service_list')) {
       if ($deprecation = $this->getParameter('_deprecated_service_list')[$id] ?? '') {
         @trigger_error($deprecation, E_USER_DEPRECATED);
@@ -161,7 +161,7 @@ class Container implements ContainerInterface, ResetInterface {
     // is used, the actual wanted behavior is to re-try getting the service at a
     // later point.
     if (!$definition) {
-      return NULL;
+      return;
     }
 
     // Definition is a keyed array, so [0] is only defined when it is a
@@ -181,7 +181,7 @@ class Container implements ContainerInterface, ResetInterface {
       unset($this->services[$id]);
 
       if (ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE !== $invalid_behavior) {
-        return NULL;
+        return;
       }
 
       throw $e;
@@ -312,14 +312,14 @@ class Container implements ContainerInterface, ResetInterface {
   /**
    * {@inheritdoc}
    */
-  public function has($id): bool {
+  public function has($id) {
     return isset($this->aliases[$id]) || isset($this->services[$id]) || isset($this->serviceDefinitions[$id]);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getParameter($name): array|bool|string|int|float|NULL {
+  public function getParameter($name) {
     if (!(isset($this->parameters[$name]) || array_key_exists($name, $this->parameters))) {
       if (!$name) {
         throw new ParameterNotFoundException('');
@@ -334,7 +334,7 @@ class Container implements ContainerInterface, ResetInterface {
   /**
    * {@inheritdoc}
    */
-  public function hasParameter($name): bool {
+  public function hasParameter($name) {
     return isset($this->parameters[$name]) || array_key_exists($name, $this->parameters);
   }
 
@@ -352,7 +352,7 @@ class Container implements ContainerInterface, ResetInterface {
   /**
    * {@inheritdoc}
    */
-  public function initialized($id): bool {
+  public function initialized($id) {
     if (isset($this->aliases[$id])) {
       $id = $this->aliases[$id];
     }

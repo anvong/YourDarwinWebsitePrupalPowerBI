@@ -47,14 +47,14 @@ class ResourceObjectNormalizer extends NormalizerBase {
   /**
    * {@inheritdoc}
    */
-  public function supportsDenormalization($data, string $type, string $format = NULL, array $context = []): bool {
+  public function supportsDenormalization($data, $type, $format = NULL) {
     return FALSE;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function normalize($object, $format = NULL, array $context = []): array|string|int|float|bool|\ArrayObject|NULL {
+  public function normalize($object, $format = NULL, array $context = []) {
     assert($object instanceof ResourceObject);
     // If the fields to use were specified, only output those field values.
     $context['resource_object'] = $object;

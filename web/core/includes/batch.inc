@@ -183,7 +183,7 @@ function _batch_progress_page() {
     print $fallback;
 
     // Perform actual processing.
-    [$percentage, $message, $label] = _batch_process();
+    [$percentage, $message, $label] = _batch_process($batch);
     if ($percentage == 100) {
       $new_op = 'finished';
     }

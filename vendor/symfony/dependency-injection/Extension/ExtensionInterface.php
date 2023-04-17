@@ -23,8 +23,6 @@ interface ExtensionInterface
     /**
      * Loads a specific configuration.
      *
-     * @param array<array<mixed>> $configs
-     *
      * @throws \InvalidArgumentException When provided tag is not defined in this extension
      */
     public function load(array $configs, ContainerBuilder $container);
@@ -32,7 +30,7 @@ interface ExtensionInterface
     /**
      * Returns the namespace to be used for this extension (XML namespace).
      *
-     * @return string
+     * @return string The XML namespace
      */
     public function getNamespace();
 
@@ -48,7 +46,7 @@ interface ExtensionInterface
      *
      * This alias is also the mandatory prefix to use when using YAML.
      *
-     * @return string
+     * @return string The alias
      */
     public function getAlias();
 }

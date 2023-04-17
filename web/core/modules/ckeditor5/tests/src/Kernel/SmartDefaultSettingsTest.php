@@ -504,10 +504,6 @@ class SmartDefaultSettingsTest extends KernelTestBase {
       $updated_text_editor->toArray()
     );
 
-    // Save this to ensure the config export order is applied.
-    // @see \Drupal\Core\Config\StorableConfigBase::castValue()
-    $updated_text_editor->save();
-
     // We should now have the expected data in the Editor config entity.
     $this->assertSame('ckeditor5', $updated_text_editor->getEditor());
     $this->assertSame($expected_ckeditor5_settings, $updated_text_editor->getSettings());
@@ -935,12 +931,12 @@ class SmartDefaultSettingsTest extends KernelTestBase {
           ),
         ],
         'plugins' => array_merge(
+          $basic_html_test_case['expected_ckeditor5_settings']['plugins'],
           [
             'ckeditor5_alignment' => [
               'enabled_alignments' => ['center', 'justify'],
             ],
           ],
-          $basic_html_test_case['expected_ckeditor5_settings']['plugins'],
         ),
       ],
       'expected_superset' => implode(' ', [
@@ -1137,10 +1133,6 @@ class SmartDefaultSettingsTest extends KernelTestBase {
               'heading6',
             ],
           ],
-          'ckeditor5_list' => [
-            'reversed' => FALSE,
-            'startIndex' => TRUE,
-          ],
           'ckeditor5_sourceEditing' => [
             'allowed_tags' => [
               '<cite>',
@@ -1157,6 +1149,10 @@ class SmartDefaultSettingsTest extends KernelTestBase {
               '<h5 id>',
               '<h6 id>',
             ],
+          ],
+          'ckeditor5_list' => [
+            'reversed' => FALSE,
+            'startIndex' => TRUE,
           ],
         ],
       ],
@@ -1272,10 +1268,6 @@ class SmartDefaultSettingsTest extends KernelTestBase {
               'heading6',
             ],
           ],
-          'ckeditor5_list' => [
-            'reversed' => FALSE,
-            'startIndex' => TRUE,
-          ],
           'ckeditor5_sourceEditing' => [
             'allowed_tags' => [
               '<cite>',
@@ -1292,6 +1284,10 @@ class SmartDefaultSettingsTest extends KernelTestBase {
               '<h5 id>',
               '<h6 id>',
             ],
+          ],
+          'ckeditor5_list' => [
+            'reversed' => FALSE,
+            'startIndex' => TRUE,
           ],
         ],
       ],
@@ -1379,17 +1375,17 @@ class SmartDefaultSettingsTest extends KernelTestBase {
           ],
         ],
         'plugins' => [
-          'ckeditor5_sourceEditing' => [
-            'allowed_tags' => [
-              '<span>',
-            ],
-          ],
           'ckeditor5_style' => [
             'styles' => [
               [
                 'label' => 'Llama span',
                 'element' => '<span class="llama">',
               ],
+            ],
+          ],
+          'ckeditor5_sourceEditing' => [
+            'allowed_tags' => [
+              '<span>',
             ],
           ],
         ],

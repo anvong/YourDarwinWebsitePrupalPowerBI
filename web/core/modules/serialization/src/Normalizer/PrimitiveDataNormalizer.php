@@ -20,7 +20,7 @@ class PrimitiveDataNormalizer extends NormalizerBase {
   /**
    * {@inheritdoc}
    */
-  public function normalize($object, $format = NULL, array $context = []): array|string|int|float|bool|\ArrayObject|NULL {
+  public function normalize($object, $format = NULL, array $context = []) {
     // Add cacheability if applicable.
     $this->addCacheableDependency($context, $object);
 

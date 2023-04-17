@@ -25,11 +25,11 @@ use Symfony\Component\VarDumper\Cloner\Stub;
 /**
  * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
  *
- * @final
+ * @final since Symfony 4.4
  */
 class ValidatorDataCollector extends DataCollector implements LateDataCollectorInterface
 {
-    private TraceableValidator $validator;
+    private $validator;
 
     public function __construct(TraceableValidator $validator)
     {
@@ -37,7 +37,12 @@ class ValidatorDataCollector extends DataCollector implements LateDataCollectorI
         $this->reset();
     }
 
-    public function collect(Request $request, Response $response, \Throwable $exception = null)
+    /**
+     * {@inheritdoc}
+     *
+     * @param \Throwable|null $exception
+     */
+    public function collect(Request $request, Response $response/* , \Throwable $exception = null */)
     {
         // Everything is collected once, on kernel terminate.
     }
@@ -50,6 +55,9 @@ class ValidatorDataCollector extends DataCollector implements LateDataCollectorI
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function lateCollect()
     {
         $collected = $this->validator->getCollectedData();
@@ -59,22 +67,31 @@ class ValidatorDataCollector extends DataCollector implements LateDataCollectorI
         }, 0);
     }
 
-    public function getCalls(): Data
+    /**
+     * @return Data
+     */
+    public function getCalls()
     {
         return $this->data['calls'];
     }
 
-    public function getViolationsCount(): int
+    /**
+     * @return int
+     */
+    public function getViolationsCount()
     {
         return $this->data['violations_count'];
     }
 
-    public function getName(): string
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
     {
         return 'validator';
     }
 
-    protected function getCasters(): array
+    protected function getCasters()
     {
         return parent::getCasters() + [
             \Exception::class => function (\Exception $e, array $a, Stub $s) {

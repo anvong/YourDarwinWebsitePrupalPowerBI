@@ -29,7 +29,7 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
  * When you make another call to the validator, while the validation is in
  * progress, the violations will be isolated from each other:
  *
- *     public function validate(mixed $value, Constraint $constraint)
+ *     public function validate($value, Constraint $constraint)
  *     {
  *         $validator = $this->context->getValidator();
  *
@@ -40,7 +40,7 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
  * However, if you want to add the violations to the current context, use the
  * {@link ValidatorInterface::inContext()} method:
  *
- *     public function validate(mixed $value, Constraint $constraint)
+ *     public function validate($value, Constraint $constraint)
  *     {
  *         $validator = $this->context->getValidator();
  *
@@ -67,7 +67,7 @@ interface ExecutionContextInterface
      * @param string|\Stringable $message The error message as a string or a stringable object
      * @param array              $params  The parameters substituted in the error message
      */
-    public function addViolation(string $message, array $params = []);
+    public function addViolation($message, array $params = []);
 
     /**
      * Returns a builder for adding a violation with extended information.
@@ -83,15 +83,17 @@ interface ExecutionContextInterface
      *
      * @param string|\Stringable $message    The error message as a string or a stringable object
      * @param array              $parameters The parameters substituted in the error message
+     *
+     * @return ConstraintViolationBuilderInterface The violation builder
      */
-    public function buildViolation(string $message, array $parameters = []): ConstraintViolationBuilderInterface;
+    public function buildViolation($message, array $parameters = []);
 
     /**
      * Returns the validator.
      *
      * Useful if you want to validate additional constraints:
      *
-     *     public function validate(mixed $value, Constraint $constraint)
+     *     public function validate($value, Constraint $constraint)
      *     {
      *         $validator = $this->context->getValidator();
      *
@@ -101,8 +103,10 @@ interface ExecutionContextInterface
      *             // ...
      *         }
      *     }
+     *
+     * @return ValidatorInterface
      */
-    public function getValidator(): ValidatorInterface;
+    public function getValidator();
 
     /**
      * Returns the currently validated object.
@@ -113,19 +117,22 @@ interface ExecutionContextInterface
      * returned.
      *
      * In other cases, null is returned.
+     *
+     * @return object|null The currently validated object or null
      */
-    public function getObject(): ?object;
+    public function getObject();
 
     /**
      * Sets the currently validated value.
      *
+     * @param mixed       $value        The validated value
      * @param object|null $object       The currently validated object
      * @param string      $propertyPath The property path to the current value
      *
      * @internal Used by the validator engine. Should not be called by user
      *           code.
      */
-    public function setNode(mixed $value, ?object $object, MetadataInterface $metadata = null, string $propertyPath);
+    public function setNode($value, $object, MetadataInterface $metadata = null, $propertyPath);
 
     /**
      * Sets the currently validated group.
@@ -135,7 +142,7 @@ interface ExecutionContextInterface
      * @internal Used by the validator engine. Should not be called by user
      *           code.
      */
-    public function setGroup(?string $group);
+    public function setGroup($group);
 
     /**
      * Sets the currently validated constraint.
@@ -155,7 +162,7 @@ interface ExecutionContextInterface
      * @internal Used by the validator engine. Should not be called by user
      *           code.
      */
-    public function markGroupAsValidated(string $cacheKey, string $groupHash);
+    public function markGroupAsValidated($cacheKey, $groupHash);
 
     /**
      * Returns whether an object was validated in a specific validation group.
@@ -164,9 +171,13 @@ interface ExecutionContextInterface
      * @param string $groupHash The group's name or hash, if it is group
      *                          sequence
      *
-     * @internal Used by the validator engine
+     * @return bool Whether the object was already validated for that
+     *              group
+     *
+     * @internal Used by the validator engine. Should not be called by user
+     *           code.
      */
-    public function isGroupValidated(string $cacheKey, string $groupHash): bool;
+    public function isGroupValidated($cacheKey, $groupHash);
 
     /**
      * Marks a constraint as validated for an object.
@@ -177,7 +188,7 @@ interface ExecutionContextInterface
      * @internal Used by the validator engine. Should not be called by user
      *           code.
      */
-    public function markConstraintAsValidated(string $cacheKey, string $constraintHash);
+    public function markConstraintAsValidated($cacheKey, $constraintHash);
 
     /**
      * Returns whether a constraint was validated for an object.
@@ -185,9 +196,12 @@ interface ExecutionContextInterface
      * @param string $cacheKey       The hash of the object
      * @param string $constraintHash The hash of the constraint
      *
-     * @internal Used by the validator engine
+     * @return bool Whether the constraint was already validated
+     *
+     * @internal Used by the validator engine. Should not be called by user
+     *           code.
      */
-    public function isConstraintValidated(string $cacheKey, string $constraintHash): bool;
+    public function isConstraintValidated($cacheKey, $constraintHash);
 
     /**
      * Marks that an object was initialized.
@@ -199,23 +213,28 @@ interface ExecutionContextInterface
      *
      * @see ObjectInitializerInterface
      */
-    public function markObjectAsInitialized(string $cacheKey);
+    public function markObjectAsInitialized($cacheKey);
 
     /**
      * Returns whether an object was initialized.
      *
      * @param string $cacheKey The hash of the object
      *
-     * @internal Used by the validator engine
+     * @return bool Whether the object was already initialized
+     *
+     * @internal Used by the validator engine. Should not be called by user
+     *           code.
      *
      * @see ObjectInitializerInterface
      */
-    public function isObjectInitialized(string $cacheKey): bool;
+    public function isObjectInitialized($cacheKey);
 
     /**
      * Returns the violations generated by the validator so far.
+     *
+     * @return ConstraintViolationListInterface The constraint violation list
      */
-    public function getViolations(): ConstraintViolationListInterface;
+    public function getViolations();
 
     /**
      * Returns the value at which validation was started in the object graph.
@@ -225,16 +244,20 @@ interface ExecutionContextInterface
      * object from which the traversal started.
      *
      * The current value is returned by {@link getValue}.
+     *
+     * @return mixed The root value of the validation
      */
-    public function getRoot(): mixed;
+    public function getRoot();
 
     /**
      * Returns the value that the validator is currently validating.
      *
      * If you want to retrieve the object that was originally passed to the
      * validator, use {@link getRoot}.
+     *
+     * @return mixed The currently validated value
      */
-    public function getValue(): mixed;
+    public function getValue();
 
     /**
      * Returns the metadata for the currently validated value.
@@ -248,13 +271,18 @@ interface ExecutionContextInterface
      * If the validated value is neither of these, for example if the validator
      * has been called with a plain value and constraint, this method returns
      * null.
+     *
+     * @return MetadataInterface|null the metadata of the currently validated
+     *                                value
      */
-    public function getMetadata(): ?MetadataInterface;
+    public function getMetadata();
 
     /**
      * Returns the validation group that is currently being validated.
+     *
+     * @return string|null The current validation group
      */
-    public function getGroup(): ?string;
+    public function getGroup();
 
     /**
      * Returns the class name of the current node.
@@ -262,8 +290,10 @@ interface ExecutionContextInterface
      * If the metadata of the current node does not implement
      * {@link Mapping\ClassMetadataInterface} or if no metadata is available for the
      * current node, this method returns null.
+     *
+     * @return string|null The class name or null, if no class name could be found
      */
-    public function getClassName(): ?string;
+    public function getClassName();
 
     /**
      * Returns the property name of the current node.
@@ -271,8 +301,10 @@ interface ExecutionContextInterface
      * If the metadata of the current node does not implement
      * {@link PropertyMetadataInterface} or if no metadata is available for the
      * current node, this method returns null.
+     *
+     * @return string|null The property name or null, if no property name could be found
      */
-    public function getPropertyName(): ?string;
+    public function getPropertyName();
 
     /**
      * Returns the property path to the value that the validator is currently
@@ -305,5 +337,5 @@ interface ExecutionContextInterface
      *                string if the validator is currently validating the
      *                root value of the validation graph.
      */
-    public function getPropertyPath(string $subPath = ''): string;
+    public function getPropertyPath($subPath = '');
 }

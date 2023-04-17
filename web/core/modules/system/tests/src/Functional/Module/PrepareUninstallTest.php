@@ -44,7 +44,7 @@ class PrepareUninstallTest extends BrowserTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  public function setUp(): void {
     parent::setUp();
 
     $admin_user = $this->drupalCreateUser(['administer modules']);

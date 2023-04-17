@@ -41,7 +41,7 @@ class RedirectLeadingSlashesSubscriber implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents(): array {
+  public static function getSubscribedEvents() {
     $events[KernelEvents::REQUEST][] = ['redirect', 1000];
     return $events;
   }

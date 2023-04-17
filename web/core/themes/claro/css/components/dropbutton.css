@@ -18,39 +18,23 @@
   /**
   * Dropbutton
   */
-  --dropbutton-spacing-size: var(--space-m);
-  --dropbutton-font-size: var(--font-size-base);
-  --dropbutton-line-height: var(--space-m);
-  --dropbutton-toggle-size: 3rem;
-  --dropbutton-border-size: 1px;
-  --dropbutton-toggle-size-spacing: var(--dropbutton-border-size);
-  --dropbutton-border-radius-size: 2px;
-  --dropbutton-item-max-width: 12.5rem;
   /* Variant variables: small. */
-  --dropbutton-small-spacing-size: 0.625rem;
-  --dropbutton-small-font-size: var(--font-size-xs);
-  --dropbutton-small-line-height: 0.75rem;
-  --dropbutton-small-toggle-size: calc((2 * var(--dropbutton-small-spacing-size)) + var(--dropbutton-small-line-height));
   /* Variant variables: extra small. */
-  --dropbutton-extrasmall-spacing-size: 0.375rem;
-  --dropbutton-extrasmall-font-size: var(--font-size-xs);
-  --dropbutton-extrasmall-line-height: 0.75rem;
-  --dropbutton-extrasmall-toggle-size: calc((2 * var(--dropbutton-extrasmall-spacing-size)) + var(--dropbutton-extrasmall-line-height));
 }
 
 .dropbutton-wrapper {
   display: inline-flex;
-  border-radius: var(--button-border-radius-size);
+  border-radius: 2px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 .form-actions .dropbutton-wrapper {
-  margin: var(--space-xs) var(--space-m) var(--space-xs) 0;
+  margin: 0.5rem 1rem 0.5rem 0;
 }
 
 [dir="rtl"] .form-actions .dropbutton-wrapper {
   margin-right: 0;
-  margin-left: var(--space-m);
+  margin-left: 1rem;
 }
 
 .dropbutton-widget {
@@ -79,17 +63,17 @@
 
 .js .dropbutton {
   min-width: 6rem; /* Help mitigate long dropbutton text from obscuring other dropbuttons. */
-  height: var(--dropbutton-toggle-size);
+  height: 3rem;
 }
 
 /* Variants. */
 
 .js.no-touchevents .dropbutton--small {
-  height: var(--dropbutton-small-toggle-size);
+  height: 2rem;
 }
 
 .js.no-touchevents .dropbutton--extrasmall {
-  height: var(--dropbutton-extrasmall-toggle-size);
+  height: 1.5rem;
 }
 
 /**
@@ -97,32 +81,32 @@
  */
 
 .js .dropbutton--multiple .dropbutton__item:first-of-type {
-  margin-right: calc(var(--dropbutton-toggle-size) + var(--dropbutton-toggle-size-spacing)); /* LTR */
+  margin-right: calc(3rem + 1px); /* LTR */
 }
 
 [dir="rtl"].js .dropbutton--multiple .dropbutton__item:first-of-type {
   margin-right: 0;
-  margin-left: calc(var(--dropbutton-toggle-size) + var(--dropbutton-toggle-size-spacing));
+  margin-left: calc(3rem + 1px);
 }
 
 /* First dropbutton list item variants */
 
 .js.no-touchevents .dropbutton--multiple.dropbutton--small .dropbutton__item:first-of-type {
-  margin-right: calc(var(--dropbutton-small-toggle-size) + var(--dropbutton-toggle-size-spacing)); /* LTR */
+  margin-right: calc(2rem + 1px); /* LTR */
 }
 
 [dir="rtl"].js.no-touchevents .dropbutton--multiple.dropbutton--small .dropbutton__item:first-of-type {
   margin-right: 0;
-  margin-left: calc(var(--dropbutton-small-toggle-size) + var(--dropbutton-toggle-size-spacing));
+  margin-left: calc(2rem + 1px);
 }
 
 .js.no-touchevents .dropbutton--multiple.dropbutton--extrasmall .dropbutton__item:first-of-type {
-  margin-right: calc(var(--dropbutton-extrasmall-toggle-size) + var(--dropbutton-toggle-size-spacing)); /* LTR */
+  margin-right: calc(1.5rem + 1px); /* LTR */
 }
 
 [dir="rtl"].js.no-touchevents .dropbutton--multiple.dropbutton--extrasmall .dropbutton__item:first-of-type {
   margin-right: 0;
-  margin-left: calc(var(--dropbutton-extrasmall-toggle-size) + var(--dropbutton-toggle-size-spacing));
+  margin-left: calc(1.5rem + 1px);
 }
 
 /**
@@ -130,7 +114,7 @@
  */
 
 .dropbutton__toggle {
-  border: var(--dropbutton-border-size) solid transparent !important;
+  border: 1px solid transparent !important;
 }
 
 .dropbutton__toggle {
@@ -139,10 +123,10 @@
   top: 0;
   right: 0; /* LTR */
   bottom: 0;
-  width: var(--dropbutton-toggle-size);
-  height: var(--dropbutton-toggle-size); /* 1 */
-  border-radius: 0 var(--button-border-radius-size) var(--button-border-radius-size) 0; /* LTR */
-  background: var(--button-bg-color);
+  width: 3rem;
+  height: 3rem; /* 1 */
+  border-radius: 0 2px 2px 0; /* LTR */
+  background: #d3d4d9;
   font-size: 1px; /* iOS Safari sets a minimum button-width based on font-size. */
   -webkit-appearance: none;
   appearance: none;
@@ -151,7 +135,7 @@
 [dir="rtl"] .dropbutton__toggle {
   right: auto;
   left: 0;
-  border-radius: var(--button-border-radius-size) 0 0 var(--button-border-radius-size);
+  border-radius: 2px 0 0 2px;
 }
 
 .dropbutton__toggle::before {
@@ -169,8 +153,8 @@
 /* Toggler states. */
 
 .dropbutton__toggle:hover {
-  color: var(--button-fg-color);
-  background-color: var(--button--hover-bg-color);
+  color: #232429;
+  background-color: #c1c2c7;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -179,8 +163,8 @@
 }
 
 .dropbutton__toggle:active {
-  color: var(--button-fg-color);
-  background-color: var(--button--active-bg-color);
+  color: #232429;
+  background-color: #adaeb3;
 }
 
 .dropbutton-wrapper.open .dropbutton__toggle::before {
@@ -194,13 +178,13 @@
 /* Toggler variants */
 
 .no-touchevents .dropbutton--small .dropbutton__toggle {
-  width: var(--dropbutton-small-toggle-size);
-  height: var(--dropbutton-small-toggle-size);
+  width: 2rem;
+  height: 2rem;
 }
 
 .no-touchevents .dropbutton--extrasmall .dropbutton__toggle {
-  width: var(--dropbutton-extrasmall-toggle-size);
-  height: var(--dropbutton-extrasmall-toggle-size);
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .no-touchevents .dropbutton--small .dropbutton__toggle::before,
@@ -210,12 +194,12 @@
 
 /* High contrast. */
 
-@media (forced-colors: active) {
+@media (-ms-high-contrast: active), (forced-colors: active) {
   /* Default. */
   .dropbutton__toggle::before {
     width: 0.5625rem;
     height: 0.5625rem;
-    margin-top: calc(0.5625rem / (2 * -1.41429));
+    margin-top: -0.19886rem;
     transform: translate(50%, -50%) rotate(135deg); /* LTR */
     border: 0.125rem solid;
     border-width: 0.125rem 0.125rem 0 0;
@@ -223,7 +207,7 @@
   }
 
   .dropbutton-wrapper.open .dropbutton__toggle::before {
-    margin-top: calc(0.5625rem / (2 * 1.41429));
+    margin-top: 0.19886rem;
     transform: translate(50%, -50%) rotate(315deg);
   }
   [dir="rtl"] .dropbutton-wrapper.open .dropbutton__toggle::before {
@@ -236,11 +220,11 @@
   .no-touchevents .dropbutton--extrasmall .dropbutton__toggle::before {
     width: 0.4375rem;
     height: 0.4375rem;
-    margin-top: calc(0.4375rem / (2 * -1.41429));
+    margin-top: -0.15467rem;
   }
 
   .dropbutton-wrapper.open .dropbutton__toggle::before {
-    margin-top: calc(0.4375rem / (2 * 1.41429));
+    margin-top: 0.15467rem;
   }
 }
 
@@ -251,59 +235,59 @@
  */
 
 .dropbutton__item:first-of-type > * {
-  border: var(--dropbutton-border-size) solid transparent !important;
+  border: 1px solid transparent !important;
 }
 
 .dropbutton__item:first-of-type > * {
   display: inline-block;
   margin: 0;
-  padding: calc(var(--dropbutton-spacing-size) - var(--dropbutton-border-size)) calc(var(--space-l) - var(--dropbutton-border-size));
+  padding: calc(1rem - 1px) calc(1.5rem - 1px);
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  color: var(--button-fg-color); /* 1 */
-  border-radius: var(--button-border-radius-size);
-  background-color: var(--button-bg-color);
-  font-size: var(--dropbutton-font-size);
+  color: #232429; /* 1 */
+  border-radius: 2px;
+  background-color: #d3d4d9;
+  font-size: 1rem;
   font-weight: 700;
-  line-height: var(--dropbutton-line-height);
+  line-height: 1rem;
   -webkit-appearance: none;
   appearance: none;
   -webkit-font-smoothing: antialiased;
 }
 
 .dropbutton--multiple .dropbutton__item:first-of-type > * {
-  padding-right: calc(var(--dropbutton-spacing-size) - var(--dropbutton-border-size));
-  padding-left: calc(var(--dropbutton-spacing-size) - var(--dropbutton-border-size));
+  padding-right: calc(1rem - 1px);
+  padding-left: calc(1rem - 1px);
 }
 
 /* Variants */
 
 .no-touchevents .dropbutton--small .dropbutton__item:first-of-type > * {
-  padding-top: calc(var(--dropbutton-small-spacing-size) - var(--dropbutton-border-size));
-  padding-bottom: calc(var(--dropbutton-small-spacing-size) - var(--dropbutton-border-size));
-  font-size: var(--dropbutton-small-font-size);
-  line-height: var(--dropbutton-small-line-height);
+  padding-top: calc(0.625rem - 1px);
+  padding-bottom: calc(0.625rem - 1px);
+  font-size: 0.79rem;
+  line-height: 0.75rem;
 }
 
 .no-touchevents .dropbutton--extrasmall .dropbutton__item:first-of-type > * {
-  padding-top: calc(var(--dropbutton-extrasmall-spacing-size) - var(--dropbutton-border-size));
-  padding-bottom: calc(var(--dropbutton-extrasmall-spacing-size) - var(--dropbutton-border-size));
-  font-size: var(--dropbutton-extrasmall-font-size);
-  line-height: var(--dropbutton-extrasmall-line-height);
+  padding-top: calc(0.375rem - 1px);
+  padding-bottom: calc(0.375rem - 1px);
+  font-size: 0.79rem;
+  line-height: 0.75rem;
 }
 
 .dropbutton__item:first-of-type > *:hover,
 .dropbutton__item:first-of-type > .button:hover {
   text-decoration: none;
-  color: var(--button-fg-color);
-  background-color: var(--button--hover-bg-color);
+  color: #232429;
+  background-color: #c1c2c7;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
 .dropbutton__item:first-of-type > *:focus:hover,
 .dropbutton__item:first-of-type > .button:focus:hover {
-  box-shadow: 0 0 0 2px var(--color-white), 0 0 0 5px var(--color-focus);
+  box-shadow: 0 0 0 2px #fff, 0 0 0 5px #26a769;
 }
 
 .dropbutton__item:first-of-type > *:focus {
@@ -311,8 +295,8 @@
 }
 
 .dropbutton__item:first-of-type > *:active {
-  color: var(--button-fg-color);
-  background-color: var(--button--active-bg-color);
+  color: #232429;
+  background-color: #adaeb3;
 }
 
 .dropbutton--multiple .dropbutton__item:first-of-type > * {
@@ -325,11 +309,11 @@
 }
 
 .js .dropbutton--multiple .dropbutton__item:first-of-type > * {
-  border-radius: var(--button-border-radius-size) 0 0 var(--button-border-radius-size); /* LTR */
+  border-radius: 2px 0 0 2px; /* LTR */
 }
 
 [dir="rtl"].js .dropbutton--multiple .dropbutton__item:first-of-type > * {
-  border-radius: 0 var(--button-border-radius-size) var(--button-border-radius-size) 0;
+  border-radius: 0 2px 2px 0;
 }
 
 .dropbutton > .dropbutton__item > a,
@@ -355,7 +339,7 @@
  */
 
 .dropbutton__item:first-of-type ~ .dropbutton__item {
-  border: var(--dropbutton-border-size) solid var(--color-gray-200);
+  border: 1px solid #d3d4d9;
   border-bottom: 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
@@ -365,8 +349,8 @@
 }
 
 .dropbutton__item ~ .dropbutton__item:last-child {
-  border-bottom: var(--dropbutton-border-size) solid var(--color-gray-200);
-  border-radius: 0 0 var(--dropbutton-border-radius-size) var(--dropbutton-border-radius-size);
+  border-bottom: 1px solid #d3d4d9;
+  border-radius: 0 0 2px 2px;
 }
 
 /**
@@ -374,27 +358,39 @@
  */
 
 .dropbutton__item:first-of-type ~ .dropbutton__item {
-  max-width: var(--dropbutton-item-max-width);
+  max-width: 12.5rem;
 }
 
 .dropbutton__item:first-of-type ~ .dropbutton__item > a,
 .dropbutton__item:first-of-type ~ .dropbutton__item > .button {
-  border: var(--dropbutton-border-size) solid transparent !important;
+  border: 1px solid transparent !important;
 }
 
 .dropbutton__item:first-of-type ~ .dropbutton__item > a,
 .dropbutton__item:first-of-type ~ .dropbutton__item > .button {
   position: relative;
-  padding: calc(var(--dropbutton-spacing-size) - var(--dropbutton-border-size));
+  padding: calc(1rem - 1px);
   text-decoration: none;
-  color: var(--color-gray-800); /* 1 */
-  border-radius: var(--dropbutton-border-radius-size);
-  background: var(--color-white);
+  color: #55565b; /* 1 */
+  border-radius: 2px;
+  background: #fff;
   box-shadow: 0;
-  font-size: var(--dropbutton-font-size);
+  font-size: 1rem;
   font-weight: normal;
-  line-height: var(--dropbutton-line-height);
+  line-height: 1rem;
   -webkit-font-smoothing: antialiased;
+}
+
+/**
+ * Set the inherited button border color to transparent for high contrast
+ * mode.
+ */
+
+@media screen and (-ms-high-contrast: active) {
+  .dropbutton__item:first-of-type ~ .dropbutton__item > a,
+  .dropbutton__item:first-of-type ~ .dropbutton__item > .button {
+    border-color: transparent !important;
+  }
 }
 
 .dropbutton__item:first-of-type ~ .dropbutton__item > a:not(:focus),
@@ -406,18 +402,18 @@
 
 .no-touchevents .dropbutton--small .dropbutton__item:first-of-type ~ .dropbutton__item > a,
 .no-touchevents .dropbutton--small .dropbutton__item:first-of-type ~ .dropbutton__item > .button {
-  padding-top: var(--dropbutton-small-spacing-size);
-  padding-bottom: var(--dropbutton-small-spacing-size);
-  font-size: var(--dropbutton-small-font-size);
-  line-height: var(--dropbutton-small-line-height);
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-size: 0.79rem;
+  line-height: 0.75rem;
 }
 
 .no-touchevents .dropbutton--extrasmall .dropbutton__item:first-of-type ~ .dropbutton__item > a,
 .no-touchevents .dropbutton--extrasmall .dropbutton__item:first-of-type ~ .dropbutton__item > .button {
-  padding-top: var(--dropbutton-extrasmall-spacing-size);
-  padding-bottom: var(--dropbutton-extrasmall-spacing-size);
-  font-size: var(--dropbutton-extrasmall-font-size);
-  line-height: var(--dropbutton-extrasmall-line-height);
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  font-size: 0.79rem;
+  line-height: 0.75rem;
 }
 
 /* States. */
@@ -428,8 +424,8 @@
 }
 
 .dropbutton__item:first-of-type ~ .dropbutton__item > *:hover {
-  color: var(--color-text);
-  background: var(--color-gray-050);
+  color: #232429;
+  background: #f3f4f9;
 }
 
 .dropbutton__item > .button:not(:focus) {
@@ -437,9 +433,9 @@
 }
 
 .dropbutton__item:first-of-type ~ .dropbutton__item > *:focus {
-  border-color: var(--color-focus) !important;
+  border-color: #26a769 !important;
 }
 
 .dropbutton__item:first-of-type ~ .dropbutton__item > *:focus { /* 1 */
-  box-shadow: inset 0 0 0 1px var(--color-focus), 0 0 0 1px var(--color-focus);
+  box-shadow: inset 0 0 0 1px #26a769, 0 0 0 1px #26a769;
 }

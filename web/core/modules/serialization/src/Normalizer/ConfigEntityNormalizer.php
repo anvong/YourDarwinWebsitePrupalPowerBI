@@ -17,14 +17,14 @@ class ConfigEntityNormalizer extends EntityNormalizer {
   /**
    * {@inheritdoc}
    */
-  public function normalize($object, $format = NULL, array $context = []): array|string|int|float|bool|\ArrayObject|NULL {
+  public function normalize($object, $format = NULL, array $context = []) {
     return static::getDataWithoutInternals($object->toArray());
   }
 
   /**
    * {@inheritdoc}
    */
-  public function denormalize($data, $class, $format = NULL, array $context = []): mixed {
+  public function denormalize($data, $class, $format = NULL, array $context = []) {
     return parent::denormalize(static::getDataWithoutInternals($data), $class, $format, $context);
   }
 

@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\Core\Form;
 
-use Drupal\Core\Form\ConfigFormBaseTrait;
 use Drupal\Tests\UnitTestCase;
 
 /**
@@ -16,7 +15,7 @@ class ConfigFormBaseTraitTest extends UnitTestCase {
    */
   public function testConfig() {
 
-    $trait = $this->createPartialMock(ConfiguredTrait::class, ['getEditableConfigNames']);
+    $trait = $this->getMockForTrait('Drupal\Core\Form\ConfigFormBaseTrait');
     // Set up some configuration in a mocked config factory.
     $trait->configFactory = $this->getConfigFactoryStub([
       'editable.config' => [],
@@ -59,6 +58,7 @@ class ConfigFormBaseTraitTest extends UnitTestCase {
    */
   public function testConfigFactoryExceptionInvalidProperty() {
     $trait = $this->getMockForTrait('Drupal\Core\Form\ConfigFormBaseTrait');
+    $trait->configFactory = TRUE;
     $config_method = new \ReflectionMethod($trait, 'config');
     $config_method->setAccessible(TRUE);
 
@@ -67,13 +67,5 @@ class ConfigFormBaseTraitTest extends UnitTestCase {
     $this->expectExceptionMessage('No config factory available for ConfigFormBaseTrait');
     $config_method->invoke($trait, 'editable.config');
   }
-
-}
-
-class ConfiguredTrait {
-  use ConfigFormBaseTrait;
-  public $configFactory;
-
-  protected function getEditableConfigNames() {}
 
 }

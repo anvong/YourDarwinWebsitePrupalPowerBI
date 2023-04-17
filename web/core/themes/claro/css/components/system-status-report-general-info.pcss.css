@@ -3,6 +3,8 @@
  * Claro styles for the System Status general info.
  */
 
+@import "../base/variables.pcss.css";
+
 .system-status-general-info {
   padding-top: var(--space-m);
 }

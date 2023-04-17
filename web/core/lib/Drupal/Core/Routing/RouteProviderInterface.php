@@ -3,11 +3,14 @@
 namespace Drupal\Core\Routing;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Cmf\Component\Routing\RouteProviderInterface as RouteProviderBaseInterface;
 
 /**
- * Defines the route provider interface.
+ * Extends the router provider interface.
+ *
+ * @see \Symfony\Cmf\Component\Routing
  */
-interface RouteProviderInterface {
+interface RouteProviderInterface extends RouteProviderBaseInterface {
 
   /**
    * Finds routes that may potentially match the request.

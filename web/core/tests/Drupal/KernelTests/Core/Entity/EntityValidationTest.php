@@ -37,7 +37,7 @@ class EntityValidationTest extends EntityKernelTestBase {
   /**
    * @var array
    */
-  protected array $cachedDiscoveries;
+  protected $cachedDiscoveries;
 
   /**
    * {@inheritdoc}

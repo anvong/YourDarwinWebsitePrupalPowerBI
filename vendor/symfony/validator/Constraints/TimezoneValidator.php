@@ -26,7 +26,10 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
  */
 class TimezoneValidator extends ConstraintValidator
 {
-    public function validate(mixed $value, Constraint $constraint)
+    /**
+     * {@inheritdoc}
+     */
+    public function validate($value, Constraint $constraint)
     {
         if (!$constraint instanceof Timezone) {
             throw new UnexpectedTypeException($constraint, Timezone::class);
@@ -36,7 +39,7 @@ class TimezoneValidator extends ConstraintValidator
             return;
         }
 
-        if (!\is_scalar($value) && !$value instanceof \Stringable) {
+        if (!\is_scalar($value) && !(\is_object($value) && method_exists($value, '__toString'))) {
             throw new UnexpectedValueException($value, 'string');
         }
 
@@ -77,7 +80,7 @@ class TimezoneValidator extends ConstraintValidator
         if (null !== $countryCode) {
             try {
                 return @\DateTimeZone::listIdentifiers($zone, $countryCode) ?: [];
-            } catch (\ValueError) {
+            } catch (\ValueError $e) {
                 return [];
             }
         }
@@ -94,7 +97,7 @@ class TimezoneValidator extends ConstraintValidator
         if (null !== $countryCode) {
             try {
                 return Timezones::forCountryCode($countryCode);
-            } catch (MissingResourceException) {
+            } catch (MissingResourceException $e) {
                 return [];
             }
         }

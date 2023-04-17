@@ -28,15 +28,28 @@ class DateIntervalNormalizer implements NormalizerInterface, DenormalizerInterfa
         self::FORMAT_KEY => '%rP%yY%mM%dDT%hH%iM%sS',
     ];
 
-    public function __construct(array $defaultContext = [])
+    /**
+     * @param array $defaultContext
+     */
+    public function __construct($defaultContext = [])
     {
+        if (!\is_array($defaultContext)) {
+            @trigger_error(sprintf('The "format" parameter is deprecated since Symfony 4.2, use the "%s" key of the context instead.', self::FORMAT_KEY), \E_USER_DEPRECATED);
+
+            $defaultContext = [self::FORMAT_KEY => (string) $defaultContext];
+        }
+
         $this->defaultContext = array_merge($this->defaultContext, $defaultContext);
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @throws InvalidArgumentException
+     *
+     * @return string
      */
-    public function normalize(mixed $object, string $format = null, array $context = []): string
+    public function normalize($object, $format = null, array $context = [])
     {
         if (!$object instanceof \DateInterval) {
             throw new InvalidArgumentException('The object must be an instance of "\DateInterval".');
@@ -46,26 +59,33 @@ class DateIntervalNormalizer implements NormalizerInterface, DenormalizerInterfa
     }
 
     /**
-     * @param array $context
+     * {@inheritdoc}
      */
-    public function supportsNormalization(mixed $data, string $format = null /* , array $context = [] */): bool
+    public function supportsNormalization($data, $format = null)
     {
         return $data instanceof \DateInterval;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasCacheableSupportsMethod(): bool
     {
         return __CLASS__ === static::class;
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @throws InvalidArgumentException
      * @throws UnexpectedValueException
+     *
+     * @return \DateInterval
      */
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): \DateInterval
+    public function denormalize($data, $type, $format = null, array $context = [])
     {
         if (!\is_string($data)) {
-            throw new InvalidArgumentException(sprintf('Data expected to be a string, "%s" given.', get_debug_type($data)));
+            throw new InvalidArgumentException(sprintf('Data expected to be a string, "%s" given.', \gettype($data)));
         }
 
         if (!$this->isISO8601($data)) {
@@ -109,9 +129,9 @@ class DateIntervalNormalizer implements NormalizerInterface, DenormalizerInterfa
     }
 
     /**
-     * @param array $context
+     * {@inheritdoc}
      */
-    public function supportsDenormalization(mixed $data, string $type, string $format = null /* , array $context = [] */): bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return \DateInterval::class === $type;
     }

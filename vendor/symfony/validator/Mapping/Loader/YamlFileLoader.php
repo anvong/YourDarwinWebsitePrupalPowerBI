@@ -11,7 +11,6 @@
 
 namespace Symfony\Component\Validator\Mapping\Loader;
 
-use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Parser as YamlParser;
@@ -31,17 +30,17 @@ class YamlFileLoader extends FileLoader
      */
     protected $classes = null;
 
-    public function __construct(string $file)
-    {
-        $this->file = $file;
-    }
-
     /**
      * Caches the used YAML parser.
+     *
+     * @var YamlParser
      */
-    private YamlParser $yamlParser;
+    private $yamlParser;
 
-    public function loadClassMetadata(ClassMetadata $metadata): bool
+    /**
+     * {@inheritdoc}
+     */
+    public function loadClassMetadata(ClassMetadata $metadata)
     {
         if (null === $this->classes) {
             $this->loadClassesFromYaml();
@@ -61,9 +60,9 @@ class YamlFileLoader extends FileLoader
     /**
      * Return the names of the classes mapped in this file.
      *
-     * @return string[]
+     * @return string[] The classes names
      */
-    public function getMappedClasses(): array
+    public function getMappedClasses()
     {
         if (null === $this->classes) {
             $this->loadClassesFromYaml();
@@ -77,9 +76,9 @@ class YamlFileLoader extends FileLoader
      *
      * @param array $nodes The YAML nodes
      *
-     * @return array<array|scalar|Constraint>
+     * @return array An array of values or Constraint instances
      */
-    protected function parseNodes(array $nodes): array
+    protected function parseNodes(array $nodes)
     {
         $values = [];
 
@@ -133,9 +132,10 @@ class YamlFileLoader extends FileLoader
 
     private function loadClassesFromYaml()
     {
-        parent::__construct($this->file);
+        if (null === $this->yamlParser) {
+            $this->yamlParser = new YamlParser();
+        }
 
-        $this->yamlParser ??= new YamlParser();
         $this->classes = $this->parseFile($this->file);
 
         if (isset($this->classes['namespaces'])) {

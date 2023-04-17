@@ -57,7 +57,7 @@ class MetadataBubblingUrlGenerator implements UrlGeneratorInterface {
   /**
    * {@inheritdoc}
    */
-  public function getContext(): SymfonyRequestContext {
+  public function getContext() {
     return $this->urlGenerator->getContext();
   }
 

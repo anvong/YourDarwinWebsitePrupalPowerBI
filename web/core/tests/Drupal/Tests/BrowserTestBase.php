@@ -13,6 +13,7 @@ use Drupal\Core\Test\FunctionalTestSetupTrait;
 use Drupal\Core\Test\TestSetupTrait;
 use Drupal\Core\Url;
 use Drupal\Core\Utility\Error;
+use Drupal\FunctionalTests\AssertLegacyTrait;
 use Drupal\Tests\block\Traits\BlockCreationTrait;
 use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
@@ -53,6 +54,7 @@ abstract class BrowserTestBase extends TestCase {
   use BlockCreationTrait {
     placeBlock as drupalPlaceBlock;
   }
+  use AssertLegacyTrait;
   use RandomGeneratorTrait;
   use NodeCreationTrait {
     getNodeByTitle as drupalGetNodeByTitle;
@@ -207,7 +209,7 @@ abstract class BrowserTestBase extends TestCase {
   /**
    * {@inheritdoc}
    */
-  public static function setUpBeforeClass(): void {
+  public static function setUpBeforeClass() {
     parent::setUpBeforeClass();
     VarDumper::setHandler(TestVarDumper::class . '::cliHandler');
   }
@@ -347,7 +349,7 @@ abstract class BrowserTestBase extends TestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $this->setUpAppRoot();
@@ -403,7 +405,7 @@ abstract class BrowserTestBase extends TestCase {
   }
 
   /**
-   * Clean up the test environment.
+   * Clean up the Simpletest environment.
    */
   protected function cleanupEnvironment() {
     // Remove all prefixed tables.
@@ -427,7 +429,7 @@ abstract class BrowserTestBase extends TestCase {
   /**
    * {@inheritdoc}
    */
-  protected function tearDown(): void {
+  protected function tearDown() {
     parent::tearDown();
 
     // Destroy the testing kernel.
@@ -530,7 +532,7 @@ abstract class BrowserTestBase extends TestCase {
   }
 
   /**
-   * Installs Drupal into the test site.
+   * Installs Drupal into the Simpletest site.
    */
   public function installDrupal() {
     $this->initUserSession();
@@ -606,6 +608,29 @@ abstract class BrowserTestBase extends TestCase {
    */
   protected function config($name) {
     return $this->container->get('config.factory')->getEditable($name);
+  }
+
+  /**
+   * Gets the value of an HTTP response header.
+   *
+   * If multiple requests were required to retrieve the page, only the headers
+   * from the last request will be checked by default.
+   *
+   * @param string $name
+   *   The name of the header to retrieve. Names are case-insensitive (see RFC
+   *   2616 section 4.2).
+   *
+   * @return string|null
+   *   The HTTP header value or NULL if not found.
+   *
+   * @deprecated in drupal:9.2.0 and is removed from drupal:10.0.0. Use
+   *   $this->getSession()->getResponseHeader() instead.
+   *
+   * @see https://www.drupal.org/node/3168383
+   */
+  protected function drupalGetHeader($name) {
+    @trigger_error('BrowserTestBase::drupalGetHeader() is deprecated in drupal:9.2.0 and is removed from drupal:10.0.0. Use $this->getSession()->getResponseHeader() instead. See https://www.drupal.org/node/3168383', E_USER_DEPRECATED);
+    return $this->getSession()->getResponseHeader($name);
   }
 
   /**

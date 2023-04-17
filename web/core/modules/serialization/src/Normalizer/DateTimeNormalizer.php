@@ -54,7 +54,7 @@ class DateTimeNormalizer extends NormalizerBase implements DenormalizerInterface
   /**
    * {@inheritdoc}
    */
-  public function normalize($datetime, $format = NULL, array $context = []): array|string|int|float|bool|\ArrayObject|NULL {
+  public function normalize($datetime, $format = NULL, array $context = []) {
     assert($datetime instanceof DateTimeInterface);
     $drupal_date_time = $datetime->getDateTime();
     if ($drupal_date_time === NULL) {
@@ -85,7 +85,7 @@ class DateTimeNormalizer extends NormalizerBase implements DenormalizerInterface
   /**
    * {@inheritdoc}
    */
-  public function denormalize($data, $class, $format = NULL, array $context = []): mixed {
+  public function denormalize($data, $class, $format = NULL, array $context = []) {
     // This only knows how to denormalize datetime strings and timestamps. If
     // something else is received, let validation constraints handle this.
     if (!is_string($data) && !is_numeric($data)) {

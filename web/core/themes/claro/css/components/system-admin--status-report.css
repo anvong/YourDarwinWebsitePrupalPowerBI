@@ -19,12 +19,12 @@
 
 .system-status-report {
   position: relative;
-  padding-top: var(--space-m);
+  padding-top: 1rem;
 }
 
 @media screen and (min-width: 38em) {
   .system-status-report {
-    padding-top: var(--space-l);
+    padding-top: 1.5rem;
   }
 }
 

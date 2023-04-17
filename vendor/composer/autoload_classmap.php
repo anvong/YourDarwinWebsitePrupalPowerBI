@@ -6,8 +6,10 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Drupal' => $baseDir . '/web/core/lib/Drupal.php',
+    'DrupalFinder\\DrupalFinder' => $vendorDir . '/webflo/drupal-finder/src/DrupalFinder.php',
     'Drupal\\Component\\DependencyInjection\\Container' => $baseDir . '/web/core/lib/Drupal/Component/DependencyInjection/Container.php',
     'Drupal\\Component\\DependencyInjection\\PhpArrayContainer' => $baseDir . '/web/core/lib/Drupal/Component/DependencyInjection/PhpArrayContainer.php',
     'Drupal\\Component\\FileCache\\FileCacheFactory' => $baseDir . '/web/core/lib/Drupal/Component/FileCache/FileCacheFactory.php',
@@ -22,12 +24,19 @@ return array(
     'Drupal\\Core\\Cache\\DatabaseCacheTagsChecksum' => $baseDir . '/web/core/lib/Drupal/Core/Cache/DatabaseCacheTagsChecksum.php',
     'Drupal\\Core\\Database\\Connection' => $baseDir . '/web/core/lib/Drupal/Core/Database/Connection.php',
     'Drupal\\Core\\Database\\Database' => $baseDir . '/web/core/lib/Drupal/Core/Database/Database.php',
+    'Drupal\\Core\\Database\\Statement' => $baseDir . '/web/core/lib/Drupal/Core/Database/Statement.php',
     'Drupal\\Core\\Database\\StatementInterface' => $baseDir . '/web/core/lib/Drupal/Core/Database/StatementInterface.php',
     'Drupal\\Core\\DependencyInjection\\Container' => $baseDir . '/web/core/lib/Drupal/Core/DependencyInjection/Container.php',
     'Drupal\\Core\\DrupalKernel' => $baseDir . '/web/core/lib/Drupal/Core/DrupalKernel.php',
     'Drupal\\Core\\DrupalKernelInterface' => $baseDir . '/web/core/lib/Drupal/Core/DrupalKernelInterface.php',
+    'Drupal\\Core\\Http\\InputBag' => $baseDir . '/web/core/lib/Drupal/Core/Http/InputBag.php',
     'Drupal\\Core\\Installer\\InstallerRedirectTrait' => $baseDir . '/web/core/lib/Drupal/Core/Installer/InstallerRedirectTrait.php',
     'Drupal\\Core\\Site\\Settings' => $baseDir . '/web/core/lib/Drupal/Core/Site/Settings.php',
+    'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
     'Normalizer' => $vendorDir . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
     'PEAR_Exception' => $vendorDir . '/pear/pear_exception/PEAR/Exception.php',
+    'PhpToken' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
+    'Stringable' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+    'UnhandledMatchError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+    'ValueError' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
 );

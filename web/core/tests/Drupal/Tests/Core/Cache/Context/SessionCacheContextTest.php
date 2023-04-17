@@ -37,7 +37,7 @@ class SessionCacheContextTest extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  public function setUp(): void {
     $this->request = new Request();
 
     $this->requestStack = new RequestStack();

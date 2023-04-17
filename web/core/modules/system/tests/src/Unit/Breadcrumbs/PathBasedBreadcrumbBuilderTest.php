@@ -19,7 +19,7 @@ use Drupal\system\PathBasedBreadcrumbBuilder;
 use Drupal\Tests\UnitTestCase;
 use Drupal\Core\Routing\RouteObjectInterface;
 use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\HttpFoundation\InputBag;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
 
@@ -194,7 +194,7 @@ class PathBasedBreadcrumbBuilderTest extends UnitTestCase {
           return [
             RouteObjectInterface::ROUTE_NAME => 'example',
             RouteObjectInterface::ROUTE_OBJECT => $route_1,
-            '_raw_variables' => new InputBag([]),
+            '_raw_variables' => new ParameterBag([]),
           ];
         }
       });
@@ -234,14 +234,14 @@ class PathBasedBreadcrumbBuilderTest extends UnitTestCase {
           return [
             RouteObjectInterface::ROUTE_NAME => 'example_bar',
             RouteObjectInterface::ROUTE_OBJECT => $route_1,
-            '_raw_variables' => new InputBag([]),
+            '_raw_variables' => new ParameterBag([]),
           ];
         }
         elseif ($request->getPathInfo() == '/example') {
           return [
             RouteObjectInterface::ROUTE_NAME => 'example',
             RouteObjectInterface::ROUTE_OBJECT => $route_2,
-            '_raw_variables' => new InputBag([]),
+            '_raw_variables' => new ParameterBag([]),
           ];
         }
       });
@@ -369,7 +369,7 @@ class PathBasedBreadcrumbBuilderTest extends UnitTestCase {
           return [
             RouteObjectInterface::ROUTE_NAME => 'user_page',
             RouteObjectInterface::ROUTE_OBJECT => $route_1,
-            '_raw_variables' => new InputBag([]),
+            '_raw_variables' => new ParameterBag([]),
           ];
         }
       });
@@ -413,7 +413,7 @@ class PathBasedBreadcrumbBuilderTest extends UnitTestCase {
  */
 class TestPathBasedBreadcrumbBuilder extends PathBasedBreadcrumbBuilder {
 
-  protected LinkGeneratorInterface $linkGenerator;
+  protected $linkGenerator;
 
   public function setStringTranslation(TranslationInterface $string_translation) {
     $this->stringTranslation = $string_translation;

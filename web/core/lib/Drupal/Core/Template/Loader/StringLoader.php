@@ -40,21 +40,21 @@ class StringLoader implements LoaderInterface {
   /**
    * {@inheritdoc}
    */
-  public function getCacheKey(string $name): string {
+  public function getCacheKey($name) {
     return $name;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function isFresh(string $name, int $time): bool {
+  public function isFresh($name, $time) {
     return TRUE;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function getSourceContext(string $name): Source {
+  public function getSourceContext($name) {
     $name = (string) $name;
     return new Source($name, $name);
   }

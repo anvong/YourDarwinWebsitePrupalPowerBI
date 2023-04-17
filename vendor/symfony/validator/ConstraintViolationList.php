@@ -15,37 +15,32 @@ namespace Symfony\Component\Validator;
  * Default implementation of {@ConstraintViolationListInterface}.
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
- *
- * @implements \IteratorAggregate<int, ConstraintViolationInterface>
  */
 class ConstraintViolationList implements \IteratorAggregate, ConstraintViolationListInterface
 {
     /**
-     * @var list<ConstraintViolationInterface>
+     * @var ConstraintViolationInterface[]
      */
-    private array $violations = [];
+    private $violations = [];
 
     /**
      * Creates a new constraint violation list.
      *
-     * @param iterable<mixed, ConstraintViolationInterface> $violations The constraint violations to add to the list
+     * @param ConstraintViolationInterface[] $violations The constraint violations to add to the list
      */
-    public function __construct(iterable $violations = [])
+    public function __construct(array $violations = [])
     {
         foreach ($violations as $violation) {
             $this->add($violation);
         }
     }
 
-    public static function createFromMessage(string $message): self
-    {
-        $self = new self();
-        $self->add(new ConstraintViolation($message, '', [], null, '', null));
-
-        return $self;
-    }
-
-    public function __toString(): string
+    /**
+     * Converts the violation into a string for debugging purposes.
+     *
+     * @return string The violation as string
+     */
+    public function __toString()
     {
         $string = '';
 
@@ -56,11 +51,17 @@ class ConstraintViolationList implements \IteratorAggregate, ConstraintViolation
         return $string;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function add(ConstraintViolationInterface $violation)
     {
         $this->violations[] = $violation;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function addAll(ConstraintViolationListInterface $otherList)
     {
         foreach ($otherList as $violation) {
@@ -68,7 +69,10 @@ class ConstraintViolationList implements \IteratorAggregate, ConstraintViolation
         }
     }
 
-    public function get(int $offset): ConstraintViolationInterface
+    /**
+     * {@inheritdoc}
+     */
+    public function get($offset)
     {
         if (!isset($this->violations[$offset])) {
             throw new \OutOfBoundsException(sprintf('The offset "%s" does not exist.', $offset));
@@ -77,45 +81,77 @@ class ConstraintViolationList implements \IteratorAggregate, ConstraintViolation
         return $this->violations[$offset];
     }
 
-    public function has(int $offset): bool
+    /**
+     * {@inheritdoc}
+     */
+    public function has($offset)
     {
         return isset($this->violations[$offset]);
     }
 
-    public function set(int $offset, ConstraintViolationInterface $violation)
+    /**
+     * {@inheritdoc}
+     */
+    public function set($offset, ConstraintViolationInterface $violation)
     {
         $this->violations[$offset] = $violation;
     }
 
-    public function remove(int $offset)
+    /**
+     * {@inheritdoc}
+     */
+    public function remove($offset)
     {
         unset($this->violations[$offset]);
     }
 
     /**
-     * @return \ArrayIterator<int, ConstraintViolationInterface>
+     * {@inheritdoc}
+     *
+     * @return \ArrayIterator|ConstraintViolationInterface[]
      */
-    public function getIterator(): \ArrayIterator
+    #[\ReturnTypeWillChange]
+    public function getIterator()
     {
         return new \ArrayIterator($this->violations);
     }
 
-    public function count(): int
+    /**
+     * @return int
+     */
+    #[\ReturnTypeWillChange]
+    public function count()
     {
         return \count($this->violations);
     }
 
-    public function offsetExists(mixed $offset): bool
+    /**
+     * @return bool
+     */
+    #[\ReturnTypeWillChange]
+    public function offsetExists($offset)
     {
         return $this->has($offset);
     }
 
-    public function offsetGet(mixed $offset): ConstraintViolationInterface
+    /**
+     * {@inheritdoc}
+     *
+     * @return mixed
+     */
+    #[\ReturnTypeWillChange]
+    public function offsetGet($offset)
     {
         return $this->get($offset);
     }
 
-    public function offsetSet(mixed $offset, mixed $violation): void
+    /**
+     * {@inheritdoc}
+     *
+     * @return void
+     */
+    #[\ReturnTypeWillChange]
+    public function offsetSet($offset, $violation)
     {
         if (null === $offset) {
             $this->add($violation);
@@ -124,7 +160,13 @@ class ConstraintViolationList implements \IteratorAggregate, ConstraintViolation
         }
     }
 
-    public function offsetUnset(mixed $offset): void
+    /**
+     * {@inheritdoc}
+     *
+     * @return void
+     */
+    #[\ReturnTypeWillChange]
+    public function offsetUnset($offset)
     {
         $this->remove($offset);
     }
@@ -133,8 +175,10 @@ class ConstraintViolationList implements \IteratorAggregate, ConstraintViolation
      * Creates iterator for errors with specific codes.
      *
      * @param string|string[] $codes The codes to find
+     *
+     * @return static new instance which contains only specific errors
      */
-    public function findByCodes(string|array $codes): static
+    public function findByCodes($codes)
     {
         $codes = (array) $codes;
         $violations = [];

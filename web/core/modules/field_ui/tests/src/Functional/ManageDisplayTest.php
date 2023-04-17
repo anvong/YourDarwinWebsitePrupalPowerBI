@@ -43,12 +43,12 @@ class ManageDisplayTest extends BrowserTestBase {
   /**
    * @var string
    */
-  private string $type;
+  private $type;
 
   /**
    * @var string
    */
-  private string $vocabulary;
+  private $vocabulary;
 
   /**
    * {@inheritdoc}

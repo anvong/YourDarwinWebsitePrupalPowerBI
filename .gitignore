@@ -1,26 +1,19 @@
-# # Ignore configuration files that may contain sensitive information
-# /web/sites/*/*settings*.php
-# /web/sites/*/*services*.yml
+# This file contains default .gitignore rules. To use it, copy it to .gitignore,
+# and it will cause files like your settings.php and user-uploaded files to be
+# excluded from Git version control. This is a common strategy to avoid
+# accidentally including private information in public repositories and patch
+# files.
+#
+# Because .gitignore can be specific to your site, this file has a different
+# name; updating Drupal core will not override your custom .gitignore file.
 
-# # Ignore paths that may contain user-generated content
-# /web/sites/*/files
-# /web/sites/*/public
-# /web/sites/*/private
-# /web/sites/*/files-public
-# /web/sites/*/files-private
+# Ignore core when managing all of a project's dependencies with Composer
+# including Drupal core.
+# core
 
-# # Ignore paths that may contain temporary files
-# /web/sites/*/translations
-# /web/sites/*/tmp
-# /web/sites/*/cache
+# Ignore dependencies that are managed with Composer.
+# Generally you should only ignore the root vendor directory. It's important
+# that core/assets/vendor and any other vendor directories within contrib or
+# custom module, theme, etc., are not ignored unless you purposely do so.
+/vendor/
 
-# # Ignore vendor dependencies and scripts
-# /vendor
-# /composer.phar
-# /composer
-# /robo.phar
-# /robo
-# /drush.phar
-# /drush
-# /drupal.phar
-# /drupal
