@@ -1,0 +1,11 @@
+# File: self.site.yml
+dev:
+  # host: yourdarwindev.com
+  # user: admin
+  root: c:/users/gvong/drupal_code/yourdarwin_working/yourdarwinwebsite
+  uri: http://yourdarwindev.com
+test:
+  # host: yourdarwintest.com
+  # user: admin
+  root: c:/users/gvong/drupal_code/yourdarwin_working/yourdarwinwebsitetest
+  uri: http://yourdarwintest.com

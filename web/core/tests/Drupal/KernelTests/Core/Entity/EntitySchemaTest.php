@@ -2,8 +2,6 @@
 
 namespace Drupal\KernelTests\Core\Entity;
 
-use Drupal\Core\Entity\EntityFieldManagerInterface;
-use Drupal\Core\Entity\EntityDefinitionUpdateManagerInterface;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
@@ -37,14 +35,14 @@ class EntitySchemaTest extends EntityKernelTestBase {
    *
    * @var \Drupal\Core\Entity\EntityFieldManagerInterface
    */
-  protected EntityFieldManagerInterface $entityFieldManager;
+  protected $entityFieldManager;
 
   /**
    * The entity definition update manager.
    *
    * @var \Drupal\Core\Entity\EntityDefinitionUpdateManagerInterface
    */
-  protected EntityDefinitionUpdateManagerInterface $entityDefinitionUpdateManager;
+  protected $entityDefinitionUpdateManager;
 
   /**
    * {@inheritdoc}

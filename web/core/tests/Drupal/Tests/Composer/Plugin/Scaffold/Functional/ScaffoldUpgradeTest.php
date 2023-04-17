@@ -38,7 +38,7 @@ class ScaffoldUpgradeTest extends TestCase {
    *
    * @var string
    */
-  protected string $fixturesDir;
+  protected $fixturesDir;
 
   /**
    * {@inheritdoc}

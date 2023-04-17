@@ -118,7 +118,7 @@ class RoutePreloader implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents(): array {
+  public static function getSubscribedEvents() {
     // Set a really low priority to catch as many as possible routes.
     $events[RoutingEvents::ALTER] = ['onAlterRoutes', -1024];
     $events[RoutingEvents::FINISHED] = ['onFinishedRoutes'];

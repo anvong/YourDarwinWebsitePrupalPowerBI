@@ -51,11 +51,6 @@ class Extension {
   protected $root;
 
   /**
-   * The extension info array.
-   */
-  public array $info;
-
-  /**
    * Constructs a new Extension object.
    *
    * @param string $root

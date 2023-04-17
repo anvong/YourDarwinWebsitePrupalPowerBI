@@ -21,7 +21,10 @@ use Symfony\Component\Serializer\Exception\LogicException;
  */
 class JsonSerializableNormalizer extends AbstractNormalizer
 {
-    public function normalize(mixed $object, string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
+    /**
+     * {@inheritdoc}
+     */
+    public function normalize($object, $format = null, array $context = [])
     {
         if ($this->isCircularReference($object, $context)) {
             return $this->handleCircularReference($object, $format, $context);
@@ -39,26 +42,32 @@ class JsonSerializableNormalizer extends AbstractNormalizer
     }
 
     /**
-     * @param array $context
+     * {@inheritdoc}
      */
-    public function supportsNormalization(mixed $data, string $format = null /* , array $context = [] */): bool
+    public function supportsNormalization($data, $format = null)
     {
         return $data instanceof \JsonSerializable;
     }
 
     /**
-     * @param array $context
+     * {@inheritdoc}
      */
-    public function supportsDenormalization(mixed $data, string $type, string $format = null /* , array $context = [] */): bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return false;
     }
 
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
+    /**
+     * {@inheritdoc}
+     */
+    public function denormalize($data, $type, $format = null, array $context = [])
     {
         throw new LogicException(sprintf('Cannot denormalize with "%s".', \JsonSerializable::class));
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasCacheableSupportsMethod(): bool
     {
         return __CLASS__ === static::class;

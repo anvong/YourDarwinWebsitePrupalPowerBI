@@ -65,6 +65,8 @@ class MultilingualReviewPageTest extends MultilingualReviewPageTestBase {
       'Book',
       'CCK translation',
       'Calendar Signup',
+      // @todo Remove Color in https://www.drupal.org/project/drupal/issues/3270899
+      'Color',
       'Comment',
       'Contact',
       'Content',
@@ -149,7 +151,6 @@ class MultilingualReviewPageTest extends MultilingualReviewPageTestBase {
       'Aggregator',
       // Block is set not_finished in migrate_state_not_finished_test.
       'Block',
-      'Color',
       'Devel',
       'Devel generate',
       'Devel node access',

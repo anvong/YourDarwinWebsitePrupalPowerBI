@@ -231,8 +231,14 @@ class YamlFileLoader
             }
 
             if (array_key_exists('deprecated', $service)) {
-              $deprecation = \is_array($service['deprecated']) ? $service['deprecated'] : ['message' => $service['deprecated']];
-              $alias->setDeprecated($deprecation['package'] ?? '', $deprecation['version'] ?? '', $deprecation['message']);
+                if (method_exists($alias, 'getDeprecation')) {
+                    $deprecation = \is_array($service['deprecated']) ? $service['deprecated'] : ['message' => $service['deprecated']];
+                    $alias->setDeprecated($deprecation['package'] ?? '', $deprecation['version'] ?? '', $deprecation['message']);
+                } else {
+                    // @todo Remove when we no longer support Symfony 4 in
+                    // https://www.drupal.org/project/drupal/issues/3197729
+                    $alias->setDeprecated(true, $service['deprecated']);
+                }
             }
 
             return;
@@ -242,19 +248,18 @@ class YamlFileLoader
             $definition = new ChildDefinition($service['parent']);
         } else {
             $definition = new Definition();
-        }
+            // Drupal services are public by default.
+            $definition->setPublic(true);
 
-        // Drupal services are public by default.
-        $definition->setPublic(true);
+            if (isset($defaults['public'])) {
+                $definition->setPublic($defaults['public']);
+            }
+            if (isset($defaults['autowire'])) {
+                $definition->setAutowired($defaults['autowire']);
+            }
 
-        if (isset($defaults['public'])) {
-            $definition->setPublic($defaults['public']);
+            $definition->setChanges([]);
         }
-        if (isset($defaults['autowire'])) {
-            $definition->setAutowired($defaults['autowire']);
-        }
-
-        $definition->setChanges([]);
 
         if (isset($service['class'])) {
             $definition->setClass($service['class']);
@@ -281,8 +286,14 @@ class YamlFileLoader
         }
 
         if (array_key_exists('deprecated', $service)) {
-          $deprecation = \is_array($service['deprecated']) ? $service['deprecated'] : ['message' => $service['deprecated']];
-          $definition->setDeprecated($deprecation['package'] ?? '', $deprecation['version'] ?? '', $deprecation['message']);
+            if (method_exists($definition, 'getDeprecation')) {
+                $deprecation = \is_array($service['deprecated']) ? $service['deprecated'] : ['message' => $service['deprecated']];
+                $definition->setDeprecated($deprecation['package'] ?? '', $deprecation['version'] ?? '', $deprecation['message']);
+            } else {
+                // @todo Remove when we no longer support Symfony 4 in
+                // https://www.drupal.org/project/drupal/issues/3197729
+                $definition->setDeprecated(true, $service['deprecated']);
+            }
         }
 
         if (isset($service['factory'])) {
@@ -474,10 +485,13 @@ class YamlFileLoader
 
             if ('=' === substr($value, -1)) {
                 $value = substr($value, 0, -1);
+                $strict = false;
+            } else {
+                $strict = true;
             }
 
             if (null !== $invalidBehavior) {
-                $value = new Reference($value, $invalidBehavior);
+                $value = new Reference($value, $invalidBehavior, $strict);
             }
         }
 

@@ -204,7 +204,7 @@ class ResponsiveImageStyleForm extends EntityForm {
 
     $form['#tree'] = TRUE;
 
-    return parent::form($form, $form_state);
+    return parent::form($form, $form_state, $responsive_image_style);
   }
 
   /**

@@ -123,7 +123,7 @@ class Date extends Formula implements ContainerFactoryPluginInterface {
       }
     }
 
-    return parent::getDefaultArgument();
+    return parent::getDefaultArgument($raw);
   }
 
   /**

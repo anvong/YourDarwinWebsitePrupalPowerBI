@@ -3,7 +3,7 @@
  * Fieldset.
  */
 
-@import "../base/media-queries.pcss.css";
+@import "../base/variables.pcss.css";
 
 .fieldset {
   min-width: 0;
@@ -14,7 +14,7 @@
   padding-inline-start: 0;
   padding-inline-end: 0;
   color: inherit;
-  border: solid 2px var(--color--gray-45);
+  border: solid 2px var(--color--gray-25);
   border-radius: var(--border-radius);
   background-color: var(--color--white);
 }
@@ -28,13 +28,21 @@
   box-shadow: none;
 }
 
+/* stylelint-disable-next-line selector-type-no-unknown */
+_:-ms-fullscreen,
+.fieldset {
+  display: table;
+  box-sizing: border-box;
+  width: 100%;
+}
+
 .fieldset__legend {
   float: left; /* Prevent sticking out of top of fieldset. */
   width: 100%;
   color: inherit;
   border-top-left-radius: var(--border-radius);
   border-top-right-radius: var(--border-radius);
-  background-color: var(--color--gray-45);
+  background-color: var(--color--gray-25);
   font-size: var(--font-size-l);
   font-weight: 700;
   line-height: var(--line-height-base);
@@ -75,7 +83,7 @@
 }
 
 .fieldset__label.is-disabled {
-  color: var(--color-text-neutral-soft);
+  color: var(--color--gray-25);
 }
 
 .fieldset__description {
@@ -118,7 +126,7 @@
 }
 
 .fieldset--group .fieldset__legend--visible ~ .fieldset__wrapper {
-  border: solid 2px var(--color--gray-45);
+  border: solid 2px var(--color--gray-25);
   border-bottom-right-radius: var(--border-radius);
   border-bottom-left-radius: var(--border-radius);
 }

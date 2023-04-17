@@ -5,6 +5,8 @@
  * Allows keyboard users to quickly skip to the main content of the page.
  */
 
+@import "../base/variables.pcss.css";
+
 .skip-link {
   z-index: 50;
   left: 50%;

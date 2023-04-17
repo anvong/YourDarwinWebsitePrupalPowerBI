@@ -33,7 +33,7 @@ class EntityResolverManager {
    *
    * @var \Drupal\Core\Entity\EntityTypeInterface[]
    */
-  protected ?array $entityTypes;
+  protected $entityTypes;
 
   /**
    * Constructs a new EntityRouteAlterSubscriber.

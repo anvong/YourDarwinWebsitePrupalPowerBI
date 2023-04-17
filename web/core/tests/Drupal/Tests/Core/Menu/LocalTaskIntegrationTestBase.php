@@ -40,7 +40,7 @@ abstract class LocalTaskIntegrationTestBase extends UnitTestCase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
 
     $container = new ContainerBuilder();

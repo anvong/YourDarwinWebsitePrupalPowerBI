@@ -6,10 +6,8 @@
  */
 
 /**
- * @defgroup file File interface
+ * @addtogroup file
  * @{
- * Common file handling functions.
- *
  * @section file_security Uploading files and security considerations
  *
  * Using \Drupal\file\Element\ManagedFile field with a defined list of allowed

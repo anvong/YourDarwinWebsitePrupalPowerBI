@@ -264,7 +264,7 @@ $databases = [];
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = 'kOqvtkn0JAs9t31RJchINd-Qkdz_K6BPnF9uS7CHm4zY8zhEmGoO6Z0Kv3QEd6fYMax0Q_fN0g';
+$settings['hash_salt'] = 'Btx8-Pj15hZMQjOHx689Lf-ECyOpX7Nzmn9najRioRJg8GPUlftYRkvXXMqws5qdyl55H8dE_Q';
 
 /**
  * Deployment identifier.
@@ -476,7 +476,7 @@ $settings['update_free_access'] = FALSE;
  *
  * Remove the leading hash signs to disable.
  */
-$settings['allow_authorize_operations'] = TRUE;
+# $settings['allow_authorize_operations'] = FALSE;
 
 /**
  * Default mode for directories and files written by Drupal.
@@ -814,7 +814,7 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
 $databases['default']['default'] = array (
-  'database' => 'yourdarwin',
+  'database' => 'yourdarwindb',
   'username' => 'root',
   'password' => '',
   'prefix' => '',
@@ -824,4 +824,8 @@ $databases['default']['default'] = array (
   'driver' => 'mysql',
   'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
 );
-$settings['config_sync_directory'] = 'sites/default/files/config_aB5rMa9WWd0ji1xiROvUty4A8Yer1o4Ix_IMA2rbKPT2LtbzZ2zaWxzhiLPytRGuVIwQXiuTlA/sync';
+
+$settings['config_sync_directory'] = 'sites/default/files/config_oLVooZEL_qTgL6mqynpjg0dE4QzxOlhtBwgRmXZpRPXWnUIaWLiTMgekjOCts3vsz4db4LA7dw/sync';
+
+global $content_directories;
+$content_directories['sync'] = $app_root.'/../content/sync';

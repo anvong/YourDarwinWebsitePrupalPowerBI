@@ -202,7 +202,8 @@ function drupal_get_database_types() {
         if (file_exists($tasks_file)) {
           $namespace = 'Drupal\\' . $module->getName() . '\\Driver\\Database\\' . $driver_file->filename;
 
-          // Add the driver with its own classes' namespace.
+          // The namespace needs to be added for db_installer_object() to find
+          // it.
           $drivers[$driver_file->filename] = $namespace;
 
           // The directory needs to be added to the autoloader, because this is
@@ -216,8 +217,7 @@ function drupal_get_database_types() {
   }
 
   foreach ($drivers as $driver => $namespace) {
-    $installer_class = $namespace . "\\Install\\Tasks";
-    $installer = new $installer_class();
+    $installer = db_installer_object($driver, $namespace);
     if ($installer->installable()) {
       $databases[$driver] = $installer;
     }
@@ -314,7 +314,7 @@ function drupal_rewrite_settings($settings = [], $settings_file = NULL) {
             break;
 
           case 'array_index':
-            if (_drupal_rewrite_settings_is_array_index($type)) {
+            if (_drupal_rewrite_settings_is_array_index($type, $value)) {
               $index = trim($value, '\'"');
               $state = 'right_bracket';
             }
@@ -1181,16 +1181,10 @@ function install_profile_info($profile, $langcode = 'en') {
  * @return \Drupal\Core\Database\Install\Tasks
  *   A class defining the requirements and tasks for installing the database.
  *
- * @deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. There is no
- *   replacement.
- *
- * @see https://www.drupal.org/node/3256641
  * @see drupal_get_database_types()
  * @see \Drupal\Core\Site\Settings::initialize()
  */
 function db_installer_object($driver, $namespace = NULL) {
-  @trigger_error('db_installer_object() is deprecated in drupal:10.0.0 and is removed from drupal:11.0.0. There is no replacement. See https://www.drupal.org/node/3256641', E_USER_DEPRECATED);
-
   // We cannot use Database::getConnection->getDriverClass() here, because
   // the connection object is not yet functional.
   if ($namespace) {

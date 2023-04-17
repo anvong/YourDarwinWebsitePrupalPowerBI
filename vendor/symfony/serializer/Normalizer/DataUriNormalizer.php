@@ -12,6 +12,8 @@
 namespace Symfony\Component\Serializer\Normalizer;
 
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser;
+use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface as DeprecatedMimeTypeGuesserInterface;
 use Symfony\Component\Mime\MimeTypeGuesserInterface;
 use Symfony\Component\Mime\MimeTypes;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
@@ -36,16 +38,33 @@ class DataUriNormalizer implements NormalizerInterface, DenormalizerInterface, C
      */
     private $mimeTypeGuesser;
 
-    public function __construct(MimeTypeGuesserInterface $mimeTypeGuesser = null)
+    /**
+     * @param MimeTypeGuesserInterface|null $mimeTypeGuesser
+     */
+    public function __construct($mimeTypeGuesser = null)
     {
-        if (!$mimeTypeGuesser && class_exists(MimeTypes::class)) {
-            $mimeTypeGuesser = MimeTypes::getDefault();
+        if ($mimeTypeGuesser instanceof DeprecatedMimeTypeGuesserInterface) {
+            @trigger_error(sprintf('Passing a %s to "%s()" is deprecated since Symfony 4.3, pass a "%s" instead.', DeprecatedMimeTypeGuesserInterface::class, __METHOD__, MimeTypeGuesserInterface::class), \E_USER_DEPRECATED);
+        } elseif (null === $mimeTypeGuesser) {
+            if (class_exists(MimeTypes::class)) {
+                $mimeTypeGuesser = MimeTypes::getDefault();
+            } elseif (class_exists(MimeTypeGuesser::class)) {
+                @trigger_error(sprintf('Passing null to "%s()" to use a default MIME type guesser without Symfony Mime installed is deprecated since Symfony 4.3. Try running "composer require symfony/mime".', __METHOD__), \E_USER_DEPRECATED);
+                $mimeTypeGuesser = MimeTypeGuesser::getInstance();
+            }
+        } elseif (!$mimeTypeGuesser instanceof MimeTypes) {
+            throw new \TypeError(sprintf('Argument 1 passed to "%s()" must be an instance of "%s" or null, "%s" given.', __METHOD__, MimeTypes::class, \is_object($mimeTypeGuesser) ? \get_class($mimeTypeGuesser) : \gettype($mimeTypeGuesser)));
         }
 
         $this->mimeTypeGuesser = $mimeTypeGuesser;
     }
 
-    public function normalize(mixed $object, string $format = null, array $context = []): string
+    /**
+     * {@inheritdoc}
+     *
+     * @return string
+     */
+    public function normalize($object, $format = null, array $context = [])
     {
         if (!$object instanceof \SplFileInfo) {
             throw new InvalidArgumentException('The object must be an instance of "\SplFileInfo".');
@@ -69,34 +88,34 @@ class DataUriNormalizer implements NormalizerInterface, DenormalizerInterface, C
     }
 
     /**
-     * @param array $context
+     * {@inheritdoc}
      */
-    public function supportsNormalization(mixed $data, string $format = null /* , array $context = [] */): bool
+    public function supportsNormalization($data, $format = null)
     {
         return $data instanceof \SplFileInfo;
     }
 
     /**
+     * {@inheritdoc}
+     *
      * Regex adapted from Brian Grinstead code.
      *
      * @see https://gist.github.com/bgrins/6194623
      *
      * @throws InvalidArgumentException
      * @throws NotNormalizableValueException
+     *
+     * @return \SplFileInfo
      */
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): \SplFileInfo
+    public function denormalize($data, $type, $format = null, array $context = [])
     {
         if (null === $data || !preg_match('/^data:([a-z0-9][a-z0-9\!\#\$\&\-\^\_\+\.]{0,126}\/[a-z0-9][a-z0-9\!\#\$\&\-\^\_\+\.]{0,126}(;[a-z0-9\-]+\=[a-z0-9\-]+)?)?(;base64)?,[a-z0-9\!\$\&\\\'\,\(\)\*\+\,\;\=\-\.\_\~\:\@\/\?\%\s]*\s*$/i', $data)) {
-            throw NotNormalizableValueException::createForUnexpectedDataType('The provided "data:" URI is not valid.', $data, ['string'], $context['deserialization_path'] ?? null, true);
+            throw new NotNormalizableValueException('The provided "data:" URI is not valid.');
         }
 
         try {
             switch ($type) {
                 case File::class:
-                    if (!class_exists(File::class)) {
-                        throw new InvalidArgumentException(sprintf('Cannot denormalize to a "%s" without the HttpFoundation component installed. Try running "composer require symfony/http-foundation".', File::class));
-                    }
-
                     return new File($data, false);
 
                 case 'SplFileObject':
@@ -104,20 +123,23 @@ class DataUriNormalizer implements NormalizerInterface, DenormalizerInterface, C
                     return new \SplFileObject($data);
             }
         } catch (\RuntimeException $exception) {
-            throw NotNormalizableValueException::createForUnexpectedDataType($exception->getMessage(), $data, ['string'], $context['deserialization_path'] ?? null, false, $exception->getCode(), $exception);
+            throw new NotNormalizableValueException($exception->getMessage(), $exception->getCode(), $exception);
         }
 
         throw new InvalidArgumentException(sprintf('The class parameter "%s" is not supported. It must be one of "SplFileInfo", "SplFileObject" or "Symfony\Component\HttpFoundation\File\File".', $type));
     }
 
     /**
-     * @param array $context
+     * {@inheritdoc}
      */
-    public function supportsDenormalization(mixed $data, string $type, string $format = null /* , array $context = [] */): bool
+    public function supportsDenormalization($data, $type, $format = null)
     {
         return isset(self::SUPPORTED_TYPES[$type]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function hasCacheableSupportsMethod(): bool
     {
         return __CLASS__ === static::class;
@@ -130,6 +152,10 @@ class DataUriNormalizer implements NormalizerInterface, DenormalizerInterface, C
     {
         if ($object instanceof File) {
             return $object->getMimeType();
+        }
+
+        if ($this->mimeTypeGuesser instanceof DeprecatedMimeTypeGuesserInterface && $mimeType = $this->mimeTypeGuesser->guess($object->getPathname())) {
+            return $mimeType;
         }
 
         if ($this->mimeTypeGuesser && $mimeType = $this->mimeTypeGuesser->guessMimeType($object->getPathname())) {

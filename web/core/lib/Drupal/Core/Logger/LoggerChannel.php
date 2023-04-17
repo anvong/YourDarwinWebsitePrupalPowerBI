@@ -91,7 +91,7 @@ class LoggerChannel implements LoggerChannelInterface {
   /**
    * {@inheritdoc}
    */
-  public function log($level, string|\Stringable $message, array $context = []): void {
+  public function log($level, $message, array $context = []) {
     if ($this->callDepth == self::MAX_CALL_DEPTH) {
       return;
     }

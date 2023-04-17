@@ -30,7 +30,7 @@ class BigPipeRegressionTest extends WebDriverTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp(): void {
+  public function setUp(): void {
     parent::setUp();
 
     // Use the big_pipe_test_theme theme.

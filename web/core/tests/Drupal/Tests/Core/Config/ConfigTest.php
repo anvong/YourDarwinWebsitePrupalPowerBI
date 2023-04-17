@@ -272,7 +272,12 @@ class ConfigTest extends UnitTestCase {
     $this->config->set('testData', 1);
 
     // Attempt to treat the single value as a nested item.
-    $this->expectError();
+    if (PHP_VERSION_ID >= 80000) {
+      $this->expectError();
+    }
+    else {
+      $this->expectWarning();
+    }
     $this->config->set('testData.illegalOffset', 1);
   }
 

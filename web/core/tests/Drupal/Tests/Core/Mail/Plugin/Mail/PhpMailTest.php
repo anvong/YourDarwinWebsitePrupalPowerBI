@@ -5,9 +5,6 @@ namespace Drupal\Tests\Core\Mail\Plugin\Mail;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Mail\Plugin\Mail\PhpMail;
 use Drupal\Tests\UnitTestCase;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\ServerBag;
 
 /**
  * @coversDefaultClass \Drupal\Core\Mail\Plugin\Mail\PhpMail
@@ -21,20 +18,6 @@ class PhpMailTest extends UnitTestCase {
    * @var \Drupal\Core\Config\ConfigFactoryInterface|\PHPUnit\Framework\MockObject\MockObject
    */
   protected $configFactory;
-
-  /**
-   * The current request.
-   *
-   * @var \Symfony\Component\HttpFoundation\Request
-   */
-  protected $request;
-
-  /**
-   * The request stack.
-   *
-   * @var \Symfony\Component\HttpFoundation\RequestStack|\Prophecy\Prophecy\ProphecyInterface
-   */
-  protected $requestStack;
 
   /**
    * {@inheritdoc}
@@ -52,15 +35,8 @@ class PhpMailTest extends UnitTestCase {
       ],
     ]);
 
-    $this->request = new Request();
-
-    $this->requestStack = $this->prophesize(RequestStack::class);
-    $this->requestStack->getCurrentRequest()
-      ->willReturn($this->request);
-
     $container = new ContainerBuilder();
     $container->set('config.factory', $this->configFactory);
-    $container->set('request_stack', $this->requestStack->reveal());
     \Drupal::setContainer($container);
   }
 
@@ -79,22 +55,6 @@ class PhpMailTest extends UnitTestCase {
 
     $mailer->expects($this->once())->method('doMail')
       ->willReturn(TRUE);
-
-    $request = $this->getMockBuilder(Request::class)
-      ->disableOriginalConstructor()
-      ->getMock();
-
-    $request->server = $this->getMockBuilder(ServerBag::class)
-      ->onlyMethods(['has', 'get'])
-      ->getMock();
-
-    $request->server->method('has')->willReturn(FALSE);
-    $request->server->method('get')->willReturn(FALSE);
-
-    $reflection = new \ReflectionClass($mailer);
-    $reflection_property = $reflection->getProperty('request');
-    $reflection_property->setAccessible(TRUE);
-    $reflection_property->setValue($mailer, $request);
 
     return $mailer;
   }

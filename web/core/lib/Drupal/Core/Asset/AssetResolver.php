@@ -126,6 +126,7 @@ class AssetResolver implements AssetResolverInterface {
       'weight' => 0,
       'media' => 'all',
       'preprocess' => TRUE,
+      'browsers' => [],
     ];
 
     foreach ($libraries_to_load as $library) {
@@ -134,6 +135,10 @@ class AssetResolver implements AssetResolverInterface {
       if (isset($definition['css'])) {
         foreach ($definition['css'] as $options) {
           $options += $default_options;
+          $options['browsers'] += [
+            'IE' => TRUE,
+            '!IE' => TRUE,
+          ];
 
           // Files with a query string cannot be preprocessed.
           if ($options['type'] === 'file' && $options['preprocess'] && strpos($options['data'], '?') !== FALSE) {
@@ -155,7 +160,17 @@ class AssetResolver implements AssetResolverInterface {
     $this->themeManager->alter('css', $css, $assets);
 
     // Sort CSS items, so that they appear in the correct order.
-    uasort($css, [static::class, 'sort']);
+    uasort($css, 'static::sort');
+
+    // Allow themes to remove CSS files by CSS files full path and file name.
+    // @todo Remove in Drupal 9.0.x.
+    if ($stylesheet_remove = $theme_info->getStyleSheetsRemove()) {
+      foreach ($css as $key => $options) {
+        if (isset($stylesheet_remove[$key])) {
+          unset($css[$key]);
+        }
+      }
+    }
 
     if ($optimize) {
       $css = \Drupal::service('asset.css.collection_optimizer')->optimize($css);
@@ -215,6 +230,7 @@ class AssetResolver implements AssetResolverInterface {
         'preprocess' => TRUE,
         'attributes' => [],
         'version' => NULL,
+        'browsers' => [],
       ];
 
       // Collect all libraries that contain JS assets and are in the header.
@@ -262,7 +278,7 @@ class AssetResolver implements AssetResolverInterface {
       $this->themeManager->alter('js', $javascript, $assets);
 
       // Sort JavaScript assets, so that they appear in the correct order.
-      uasort($javascript, [static::class, 'sort']);
+      uasort($javascript, 'static::sort');
 
       // Prepare the return value: filter JavaScript assets per scope.
       $js_assets_header = [];
@@ -318,6 +334,7 @@ class AssetResolver implements AssetResolverInterface {
         'type' => 'setting',
         'group' => JS_SETTING,
         'weight' => 0,
+        'browsers' => [],
         'data' => $settings,
       ];
       $settings_js_asset = ['drupalSettings' => $settings_as_inline_javascript];

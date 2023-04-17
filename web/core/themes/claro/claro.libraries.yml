@@ -2,7 +2,6 @@ global-styling:
   version: VERSION
   css:
     base:
-      css/base/variables.css: {}
       css/base/elements.css: {}
       css/base/typography.css: {}
       css/base/print.css: {}
@@ -34,6 +33,7 @@ global-styling:
       css/components/fieldset.css: {}
       css/components/form.css: {}
       css/components/form--checkbox-radio.css: {}
+      css/components/form--checkbox-radio--ie.css: {}
       css/components/form--field-multiple.css: {}
       css/components/form--managed-file.css: {}
       css/components/form--text.css: {}
@@ -145,6 +145,24 @@ claro.tabledrag:
   js:
     js/tabledrag.js: {}
 
+ckeditor-admin:
+  version: VERSION
+  css:
+    theme:
+      css/theme/ckeditor.admin.css: {}
+
+ckeditor-dialog:
+  version: VERSION
+  css:
+    theme:
+      css/theme/ckeditor-dialog.css: {}
+
+ckeditor-editor:
+  version: VERSION
+  css:
+    theme:
+      css/theme/ckeditor-editor.css: {}
+
 tour-styling:
   version: VERSION
   css:
@@ -223,6 +241,7 @@ form.password-confirm:
   js:
     js/user.theme.js: {}
   dependencies:
+    - core/drupal.object.assign
     - core/drupal
     - claro/global-styling
 

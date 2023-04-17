@@ -136,11 +136,6 @@ class Sql extends QueryPluginBase {
   protected $messenger;
 
   /**
-   * The count field definition.
-   */
-  public array $count_field;
-
-  /**
    * Constructs a Sql object.
    *
    * @param array $configuration

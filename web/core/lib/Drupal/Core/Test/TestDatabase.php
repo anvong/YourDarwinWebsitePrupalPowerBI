@@ -29,22 +29,23 @@ class TestDatabase {
   protected $databasePrefix;
 
   /**
-   * Returns the database connection to the site under test.
+   * Returns the database connection to the site running Simpletest.
    *
    * @return \Drupal\Core\Database\Connection
    *   The database connection to use for inserting assertions.
    *
-   * @see \Drupal\Core\Test\TestSetupTrait::getDatabaseConnection()
+   * @see \Drupal\simpletest\TestBase::prepareEnvironment()
    */
   public static function getConnection() {
     // Check whether there is a test runner connection.
     // @see run-tests.sh
+    // @todo Convert Simpletest UI runner to create + use this connection, too.
     try {
       $connection = Database::getConnection('default', 'test-runner');
     }
     catch (ConnectionNotDefinedException $e) {
       // Check whether there is a backup of the original default connection.
-      // @see \Drupal\Core\Test\TestSetupTrait::changeDatabasePrefix()
+      // @see TestBase::prepareEnvironment()
       try {
         $connection = Database::getConnection('default', 'simpletest_original_default');
       }
@@ -186,7 +187,9 @@ class TestDatabase {
    * This is useful for inserting assertions that can only be recorded after
    * the test case has been destroyed, such as PHP fatal errors. The caller
    * information is not automatically gathered since the caller is most likely
-   * inserting the assertion on behalf of other code.
+   * inserting the assertion on behalf of other code. In all other respects
+   * the method behaves just like \Drupal\simpletest\TestBase::assert() in terms
+   * of storing the assertion.
    *
    * @param string $test_id
    *   The test ID to which the assertion relates.
@@ -309,7 +312,7 @@ class TestDatabase {
   }
 
   /**
-   * Defines the database schema for run-tests.sh and PHPUnit tests.
+   * Defines the database schema for run-tests.sh and simpletest module.
    *
    * @return array
    *   Array suitable for use in a hook_schema() implementation.
@@ -318,12 +321,12 @@ class TestDatabase {
    */
   public static function testingSchema() {
     $schema['simpletest'] = [
-      'description' => 'Stores test messages',
+      'description' => 'Stores simpletest messages',
       'fields' => [
         'message_id' => [
           'type' => 'serial',
           'not null' => TRUE,
-          'description' => 'Primary Key: Unique test message ID.',
+          'description' => 'Primary Key: Unique simpletest message ID.',
         ],
         'test_id' => [
           'type' => 'int',
@@ -384,12 +387,12 @@ class TestDatabase {
       ],
     ];
     $schema['simpletest_test_id'] = [
-      'description' => 'Stores test IDs, used to auto-increment the test ID so that a fresh test ID is used.',
+      'description' => 'Stores simpletest test IDs, used to auto-increment the test ID so that a fresh test ID is used.',
       'fields' => [
         'test_id' => [
           'type' => 'serial',
           'not null' => TRUE,
-          'description' => 'Primary Key: Unique test ID used to group test results together. Each time a set of tests
+          'description' => 'Primary Key: Unique simpletest ID used to group test results together. Each time a set of tests
                             are run a new test ID is used.',
         ],
         'last_prefix' => [

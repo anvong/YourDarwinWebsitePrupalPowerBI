@@ -37,8 +37,12 @@ class TestSetupTraitTest extends UnitTestCase {
     $test_setup = $this->getMockForTrait(TestSetupTrait::class);
 
     $reflection = new \ReflectionClass($test_setup);
-    $reflection->getProperty('databasePrefix')->setValue($test_setup, 'testDbPrefix');
-    $reflection->getProperty('root')->setValue($test_setup, $root);
+    $property = $reflection->getProperty('databasePrefix');
+    $property->setAccessible(TRUE);
+    $property->setValue($test_setup, 'testDbPrefix');
+    $property = $reflection->getProperty('root');
+    $property->setAccessible(TRUE);
+    $property->setValue($test_setup, $root);
 
     $method = new \ReflectionMethod(get_class($test_setup), 'changeDatabasePrefix');
     $method->setAccessible(TRUE);

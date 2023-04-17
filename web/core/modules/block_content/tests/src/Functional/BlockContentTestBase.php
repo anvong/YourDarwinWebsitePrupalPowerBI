@@ -51,7 +51,7 @@ abstract class BlockContentTestBase extends BrowserTestBase {
   /**
    * Sets the test up.
    */
-  protected function setUp(): void {
+  protected function setUp() {
     parent::setUp();
     if ($this->autoCreateBasicBlockType) {
       $this->createBlockContentType('basic', TRUE);

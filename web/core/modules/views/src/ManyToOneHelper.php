@@ -4,7 +4,6 @@ namespace Drupal\views;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\Plugin\views\HandlerBase;
-use Drupal\views\Plugin\views\ViewsHandlerInterface;
 
 /**
  * This many to one helper object is used on both arguments and filters.
@@ -20,20 +19,6 @@ use Drupal\views\Plugin\views\ViewsHandlerInterface;
  *            queries.
  */
 class ManyToOneHelper {
-
-  /**
-   * Should the field use formula or alias.
-   *
-   * @see \Drupal\views\Plugin\views\argument\StringArgument::query()
-   *
-   * @var bool
-   */
-  public bool $formula = FALSE;
-
-  /**
-   * The handler.
-   */
-  public ViewsHandlerInterface $handler;
 
   public function __construct($handler) {
     $this->handler = $handler;
@@ -155,7 +140,7 @@ class ManyToOneHelper {
               'field' => $this->handler->realField,
               'operator' => '!=',
               'value' => $value,
-              'numeric' => !empty($this->handler->definition['numeric']),
+              'numeric' => !empty($this->definition['numeric']),
             ],
           ];
         }

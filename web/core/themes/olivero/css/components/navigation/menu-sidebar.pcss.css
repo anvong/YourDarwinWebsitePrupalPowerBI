@@ -3,7 +3,7 @@
  * Styles for menu placed in sidebar region.
  */
 
-@import "../../base/media-queries.pcss.css";
+@import "../../base/variables.pcss.css";
 
 .menu--sidebar {
   list-style: none;
@@ -33,17 +33,17 @@
       width: var(--sp4);
       height: 0;
       content: "";
-      border-block-start: solid 2px var(--color--gray-95);
+      border-block-start: solid 2px var(--color--gray-80);
     }
   }
 
   & .menu__link--link {
     text-decoration: none;
-    color: var(--color-text-neutral-loud);
+    color: var(--color--gray-0);
     font-weight: 600;
 
     &:hover {
-      color: var(--color--primary-50);
+      color: var(--color--blue-50);
     }
   }
 

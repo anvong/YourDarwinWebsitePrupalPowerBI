@@ -85,7 +85,7 @@ class PsrResponseSubscriberTest extends UnitTestCase {
     return new ViewEvent(
       $this->createMock(HttpKernelInterface::class),
       $this->createMock(Request::class),
-      HttpKernelInterface::MAIN_REQUEST,
+      HttpKernelInterface::MASTER_REQUEST,
       $controller_result
     );
   }

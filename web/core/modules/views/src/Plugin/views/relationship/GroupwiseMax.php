@@ -62,11 +62,6 @@ use Drupal\views\Entity\View;
 class GroupwiseMax extends RelationshipPluginBase {
 
   /**
-   * The namespace of the subquery.
-   */
-  public string $subquery_namespace;
-
-  /**
    * {@inheritdoc}
    */
   protected function defineOptions() {

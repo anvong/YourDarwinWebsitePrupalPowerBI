@@ -29,12 +29,13 @@ use Drupal\Core\StringTranslation\TranslationInterface;
  * @endcode
  * For example:
  * @code
- * olivero.lg:
- *   label: Large
- *   mediaQuery: 'all and (min-width: 1000px)'
- *   weight: 2
+ * bartik.mobile:
+ *   label: mobile
+ *   mediaQuery: '(min-width: 0px)'
+ *   weight: 0
  *   multipliers:
  *     - 1x
+ *     - 2x
  * @endcode
  * Optionally a breakpoint can provide a group key. By default an extensions
  * breakpoints will be placed in a group labelled with the extension name.

@@ -76,7 +76,7 @@ class ResourceResponseValidator implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents(): array {
+  public static function getSubscribedEvents() {
     $events[KernelEvents::RESPONSE][] = ['onResponse'];
     return $events;
   }

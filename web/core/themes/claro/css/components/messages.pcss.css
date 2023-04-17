@@ -5,6 +5,8 @@
  *   has been resolved.
  */
 
+@import "../base/variables.pcss.css";
+
 :root {
   --messages-bg-color: #353641;
   --messages-fg-color: var(--color-white);
@@ -132,4 +134,17 @@
 
 .messages__item + .messages__item {
   margin-top: var(--space-s);
+}
+
+@media screen and (-ms-high-contrast: active) {
+  .messages {
+    border-width: 1px 1px 1px var(--messages-border-width); /* LTR */
+  }
+  [dir="rtl"] .messages {
+    border-right-width: var(--messages-border-width);
+    border-left-width: 1px;
+  }
+  .messages__header {
+    filter: grayscale(1) brightness(1.5) contrast(10);
+  }
 }

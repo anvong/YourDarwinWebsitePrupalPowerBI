@@ -137,6 +137,16 @@ trait AssertContentTrait {
   }
 
   /**
+   * Get the current URL from the cURL handler.
+   *
+   * @return string
+   *   The current URL.
+   */
+  protected function getUrl() {
+    return 'no-url';
+  }
+
+  /**
    * Builds an XPath query.
    *
    * Builds an XPath query by replacing placeholders in the query by the value
@@ -276,11 +286,16 @@ trait AssertContentTrait {
    *   (optional) A message to display with the assertion. Do not translate
    *   messages: use strtr() to embed variables in the message text, not
    *   t(). If left blank, a default message will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE if the assertion succeeded.
    */
-  protected function assertLink($label, $index = 0, $message = '') {
+  protected function assertLink($label, $index = 0, $message = '', $group = 'Other') {
     // Cast MarkupInterface objects to string.
     $label = (string) $label;
     $links = $this->xpath('//a[normalize-space(text())=:label]', [':label' => $label]);
@@ -299,11 +314,16 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE if the assertion succeeded.
    */
-  protected function assertNoLink($label, $message = '') {
+  protected function assertNoLink($label, $message = '', $group = 'Other') {
     // Cast MarkupInterface objects to string.
     $label = (string) $label;
     $links = $this->xpath('//a[normalize-space(text())=:label]', [':label' => $label]);
@@ -324,11 +344,16 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE if the assertion succeeded.
    */
-  protected function assertLinkByHref($href, $index = 0, $message = '') {
+  protected function assertLinkByHref($href, $index = 0, $message = '', $group = 'Other') {
     $links = $this->xpath('//a[contains(@href, :href)]', [':href' => $href]);
     $message = ($message ? $message : new FormattableMarkup('Link containing href %href found.', ['%href' => $href]));
     $this->assertArrayHasKey($index, $links, $message);
@@ -345,11 +370,16 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE if the assertion succeeded.
    */
-  protected function assertNoLinkByHref($href, $message = '') {
+  protected function assertNoLinkByHref($href, $message = '', $group = 'Other') {
     $links = $this->xpath('//a[contains(@href, :href)]', [':href' => $href]);
     $message = ($message ? $message : new FormattableMarkup('No link containing href %href found.', ['%href' => $href]));
     $this->assertEmpty($links, $message);
@@ -366,11 +396,16 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE if the assertion succeeded.
    */
-  protected function assertNoLinkByHrefInMainRegion($href, $message = '') {
+  protected function assertNoLinkByHrefInMainRegion($href, $message = '', $group = 'Other') {
     $links = $this->xpath('//main//a[contains(@href, :href)]', [':href' => $href]);
     $message = ($message ? $message : new FormattableMarkup('No link containing href %href found.', ['%href' => $href]));
     $this->assertEmpty($links, $message);
@@ -389,8 +424,13 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    */
-  protected function assertRaw($raw, $message = ''): void {
+  protected function assertRaw($raw, $message = '', $group = 'Other'): void {
     if (!$message) {
       $message = 'Raw "' . Html::escape($raw) . '" found';
     }
@@ -409,8 +449,13 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    */
-  protected function assertNoRaw($raw, $message = ''): void {
+  protected function assertNoRaw($raw, $message = '', $group = 'Other'): void {
     if (!$message) {
       $message = 'Raw "' . Html::escape($raw) . '" not found';
     }
@@ -429,8 +474,13 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    */
-  protected function assertEscaped($raw, $message = ''): void {
+  protected function assertEscaped($raw, $message = '', $group = 'Other'): void {
     if (!$message) {
       $message = 'Escaped "' . Html::escape($raw) . '" found';
     }
@@ -450,8 +500,13 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    */
-  protected function assertNoEscaped($raw, $message = ''): void {
+  protected function assertNoEscaped($raw, $message = '', $group = 'Other'): void {
     if (!$message) {
       $message = 'Escaped "' . Html::escape($raw) . '" not found';
     }
@@ -471,11 +526,16 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
-   * @see \Drupal\KernelTests\AssertContentTrait::assertRaw()
+   * @see \Drupal\simpletest\AssertContentTrait::assertRaw()
    */
-  protected function assertText($text, $message = ''): void {
-    $this->assertTextHelper($text, $message, NULL, FALSE);
+  protected function assertText($text, $message = '', $group = 'Other'): void {
+    $this->assertTextHelper($text, $message, $group, FALSE);
   }
 
   /**
@@ -491,11 +551,16 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
-   * @see \Drupal\KernelTests\AssertContentTrait::assertNoRaw()
+   * @see \Drupal\simpletest\AssertContentTrait::assertNoRaw()
    */
-  protected function assertNoText($text, $message = ''): void {
-    $this->assertTextHelper($text, $message, NULL, TRUE);
+  protected function assertNoText($text, $message = '', $group = 'Other'): void {
+    $this->assertTextHelper($text, $message, $group, TRUE);
   }
 
   /**
@@ -511,12 +576,15 @@ trait AssertContentTrait {
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
    * @param string $group
-   *   Deprecated.
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default. Defaults to 'Other'.
    * @param bool $not_exists
    *   (optional) TRUE if this text should not exist, FALSE if it should.
    *   Defaults to TRUE.
    */
-  protected function assertTextHelper($text, $message = '', $group = NULL, $not_exists = TRUE): void {
+  protected function assertTextHelper($text, $message = '', $group = 'Other', $not_exists = TRUE): void {
     if (!$message) {
       $message = !$not_exists ? new FormattableMarkup('"@text" found', ['@text' => $text]) : new FormattableMarkup('"@text" not found', ['@text' => $text]);
     }
@@ -542,12 +610,17 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass, FALSE on fail.
    */
-  protected function assertUniqueText($text, $message = '') {
-    return $this->assertUniqueTextHelper($text, $message, NULL, TRUE);
+  protected function assertUniqueText($text, $message = '', $group = 'Other') {
+    return $this->assertUniqueTextHelper($text, $message, $group, TRUE);
   }
 
   /**
@@ -564,12 +637,17 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass, FALSE on fail.
    */
-  protected function assertNoUniqueText($text, $message = '') {
-    return $this->assertUniqueTextHelper($text, $message, NULL, FALSE);
+  protected function assertNoUniqueText($text, $message = '', $group = 'Other') {
+    return $this->assertUniqueTextHelper($text, $message, $group, FALSE);
   }
 
   /**
@@ -585,7 +663,10 @@ trait AssertContentTrait {
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
    * @param string $group
-   *   Deprecated.
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default. Defaults to 'Other'.
    * @param bool $be_unique
    *   (optional) TRUE if this text should be found only once, FALSE if it
    *   should be found more than once. Defaults to FALSE.
@@ -593,7 +674,7 @@ trait AssertContentTrait {
    * @return bool
    *   TRUE on pass.
    */
-  protected function assertUniqueTextHelper($text, $message = '', $group = NULL, $be_unique = FALSE) {
+  protected function assertUniqueTextHelper($text, $message = '', $group = 'Other', $be_unique = FALSE) {
     // Cast MarkupInterface objects to string.
     $text = (string) $text;
     if (!$message) {
@@ -619,11 +700,16 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass.
    */
-  protected function assertPattern($pattern, $message = '') {
+  protected function assertPattern($pattern, $message = '', $group = 'Other') {
     if (!$message) {
       $message = new FormattableMarkup('Pattern "@pattern" found', ['@pattern' => $pattern]);
     }
@@ -641,11 +727,16 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass.
    */
-  protected function assertNoPattern($pattern, $message = '') {
+  protected function assertNoPattern($pattern, $message = '', $group = 'Other') {
     if (!$message) {
       $message = new FormattableMarkup('Pattern "@pattern" not found', ['@pattern' => $pattern]);
     }
@@ -660,11 +751,16 @@ trait AssertContentTrait {
    *   Perl regex to look for including the regex delimiters.
    * @param string $message
    *   (optional) A message to display with the assertion.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass.
    */
-  protected function assertTextPattern($pattern, $message = NULL) {
+  protected function assertTextPattern($pattern, $message = NULL, $group = 'Other') {
     if (!isset($message)) {
       $message = new FormattableMarkup('Pattern "@pattern" found', ['@pattern' => $pattern]);
     }
@@ -682,8 +778,13 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    */
-  protected function assertTitle($title, $message = '') {
+  protected function assertTitle($title, $message = '', $group = 'Other') {
     // Don't use xpath as it messes with HTML escaping.
     preg_match('@<title>(.*)</title>@', $this->getRawContent(), $matches);
     if (isset($matches[1])) {
@@ -711,8 +812,13 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    */
-  protected function assertNoTitle($title, $message = '') {
+  protected function assertNoTitle($title, $message = '', $group = 'Other') {
     $actual = (string) current($this->xpath('//title'));
     if (!$message) {
       $message = new FormattableMarkup('Page title @actual is not equal to @unexpected.', [
@@ -720,7 +826,7 @@ trait AssertContentTrait {
         '@unexpected' => var_export($title, TRUE),
       ]);
     }
-    $this->assertNotEquals($title, $actual, $message);
+    $this->assertNotEquals($title, $actual, $message, $group);
   }
 
   /**
@@ -737,8 +843,13 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    */
-  protected function assertThemeOutput($callback, array $variables = [], $expected = '', $message = '') {
+  protected function assertThemeOutput($callback, array $variables = [], $expected = '', $message = '', $group = 'Other') {
     /** @var \Drupal\Core\Render\RendererInterface $renderer */
     $renderer = \Drupal::service('renderer');
 
@@ -752,7 +863,7 @@ trait AssertContentTrait {
       $message = '%callback rendered correctly.';
     }
     $message = new FormattableMarkup($message, ['%callback' => 'theme_' . $callback . '()']);
-    $this->assertSame($expected, $output, $message);
+    $this->assertSame($expected, $output, $message, $group);
   }
 
   /**
@@ -768,11 +879,16 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass.
    */
-  protected function assertFieldsByValue($fields, $value = NULL, $message = '') {
+  protected function assertFieldsByValue($fields, $value = NULL, $message = '', $group = 'Other') {
     // If value specified then check array for match.
     $found = TRUE;
     if (isset($value)) {
@@ -823,14 +939,19 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass, FALSE on fail.
    */
-  protected function assertFieldByXPath($xpath, $value = NULL, $message = '') {
+  protected function assertFieldByXPath($xpath, $value = NULL, $message = '', $group = 'Other') {
     $fields = $this->xpath($xpath);
 
-    return $this->assertFieldsByValue($fields, $value, $message);
+    return $this->assertFieldsByValue($fields, $value, $message, $group);
   }
 
   /**
@@ -869,11 +990,16 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass.
    */
-  protected function assertNoFieldByXPath($xpath, $value = NULL, $message = '') {
+  protected function assertNoFieldByXPath($xpath, $value = NULL, $message = '', $group = 'Other') {
     $fields = $this->xpath($xpath);
 
     // If value specified then check array for match.
@@ -907,11 +1033,16 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Browser'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass, FALSE on fail.
    */
-  protected function assertFieldByName($name, $value = NULL, $message = NULL) {
+  protected function assertFieldByName($name, $value = NULL, $message = NULL, $group = 'Browser') {
     if (!isset($message)) {
       if (!isset($value)) {
         $message = new FormattableMarkup('Found field with name @name', [
@@ -925,7 +1056,7 @@ trait AssertContentTrait {
         ]);
       }
     }
-    return $this->assertFieldByXPath($this->constructFieldXpath('name', $name), $value, $message);
+    return $this->assertFieldByXPath($this->constructFieldXpath('name', $name), $value, $message, $group);
   }
 
   /**
@@ -943,12 +1074,17 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Browser'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass, FALSE on fail.
    */
-  protected function assertNoFieldByName($name, $value = '', $message = '') {
-    return $this->assertNoFieldByXPath($this->constructFieldXpath('name', $name), $value, $message ? $message : new FormattableMarkup('Did not find field by name @name', ['@name' => $name]));
+  protected function assertNoFieldByName($name, $value = '', $message = '', $group = 'Browser') {
+    return $this->assertNoFieldByXPath($this->constructFieldXpath('name', $name), $value, $message ? $message : new FormattableMarkup('Did not find field by name @name', ['@name' => $name]), $group);
   }
 
   /**
@@ -966,17 +1102,22 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Browser'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass, FALSE on fail.
    */
-  protected function assertFieldById($id, $value = '', $message = '') {
+  protected function assertFieldById($id, $value = '', $message = '', $group = 'Browser') {
     // Cast MarkupInterface objects to string.
     if (isset($value)) {
       $value = (string) $value;
     }
     $message = (string) $message;
-    return $this->assertFieldByXPath($this->constructFieldXpath('id', $id), $value, $message ? $message : new FormattableMarkup('Found field by id @id', ['@id' => $id]));
+    return $this->assertFieldByXPath($this->constructFieldXpath('id', $id), $value, $message ? $message : new FormattableMarkup('Found field by id @id', ['@id' => $id]), $group);
   }
 
   /**
@@ -994,12 +1135,17 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Browser'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass, FALSE on fail.
    */
-  protected function assertNoFieldById($id, $value = '', $message = '') {
-    return $this->assertNoFieldByXPath($this->constructFieldXpath('id', $id), $value, $message ? $message : new FormattableMarkup('Did not find field by id @id', ['@id' => $id]));
+  protected function assertNoFieldById($id, $value = '', $message = '', $group = 'Browser') {
+    return $this->assertNoFieldByXPath($this->constructFieldXpath('id', $id), $value, $message ? $message : new FormattableMarkup('Did not find field by id @id', ['@id' => $id]), $group);
   }
 
   /**
@@ -1012,11 +1158,16 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Browser'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass.
    */
-  protected function assertFieldChecked($id, $message = '') {
+  protected function assertFieldChecked($id, $message = '', $group = 'Browser') {
     $message = $message ? $message : new FormattableMarkup('Checkbox field @id is checked.', ['@id' => $id]);
     $elements = $this->xpath('//input[@id=:id]', [':id' => $id]);
     $this->assertNotEmpty($elements, $message);
@@ -1034,11 +1185,16 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Browser'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass.
    */
-  protected function assertNoFieldChecked($id, $message = '') {
+  protected function assertNoFieldChecked($id, $message = '', $group = 'Browser') {
     $message = $message ? $message : new FormattableMarkup('Checkbox field @id is not checked.', ['@id' => $id]);
     $elements = $this->xpath('//input[@id=:id]', [':id' => $id]);
     $this->assertNotEmpty($elements, $message);
@@ -1058,10 +1214,15 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Browser'; most tests do not override
+   *   this default.
    */
-  protected function assertOption($id, $option, $message = '') {
+  protected function assertOption($id, $option, $message = '', $group = 'Browser') {
     $options = $this->xpath('//select[@id=:id]//option[@value=:option]', [':id' => $id, ':option' => $option]);
-    $this->assertTrue(isset($options[0]), $message ? $message : new FormattableMarkup('Option @option for field @id exists.', ['@option' => $option, '@id' => $id]));
+    $this->assertTrue(isset($options[0]), $message ? $message : new FormattableMarkup('Option @option for field @id exists.', ['@option' => $option, '@id' => $id]), $group);
   }
 
   /**
@@ -1091,10 +1252,15 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Browser'; most tests do not override
+   *   this default.
    */
-  protected function assertOptionWithDrupalSelector($drupal_selector, $option, $message = '') {
+  protected function assertOptionWithDrupalSelector($drupal_selector, $option, $message = '', $group = 'Browser') {
     $options = $this->xpath('//select[@data-drupal-selector=:data_drupal_selector]//option[@value=:option]', [':data_drupal_selector' => $drupal_selector, ':option' => $option]);
-    $this->assertTrue(isset($options[0]), $message ? $message : new FormattableMarkup('Option @option for field @data_drupal_selector exists.', ['@option' => $option, '@data_drupal_selector' => $drupal_selector]));
+    $this->assertTrue(isset($options[0]), $message ? $message : new FormattableMarkup('Option @option for field @data_drupal_selector exists.', ['@option' => $option, '@data_drupal_selector' => $drupal_selector]), $group);
   }
 
   /**
@@ -1109,11 +1275,16 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Browser'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass.
    */
-  protected function assertNoOption($id, $option, $message = '') {
+  protected function assertNoOption($id, $option, $message = '', $group = 'Browser') {
     $message = $message ? $message : new FormattableMarkup('Option @option for field @id does not exist.', ['@option' => $option, '@id' => $id]);
     $selects = $this->xpath('//select[@id=:id]', [':id' => $id]);
     $options = $this->xpath('//select[@id=:id]//option[@value=:option]', [':id' => $id, ':option' => $option]);
@@ -1134,13 +1305,18 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Browser'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass.
    *
    * @todo $id is unusable. Replace with $name.
    */
-  protected function assertOptionSelected($id, $option, $message = '') {
+  protected function assertOptionSelected($id, $option, $message = '', $group = 'Browser') {
     $message = $message ? $message : new FormattableMarkup('Option @option for field @id is selected.', ['@option' => $option, '@id' => $id]);
     $elements = $this->xpath('//select[@id=:id]//option[@value=:option]', [':id' => $id, ':option' => $option]);
     $this->assertNotEmpty($elements, $message);
@@ -1160,13 +1336,18 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Browser'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass, FALSE on fail.
    *
    * @todo $id is unusable. Replace with $name.
    */
-  protected function assertOptionSelectedWithDrupalSelector($drupal_selector, $option, $message = '') {
+  protected function assertOptionSelectedWithDrupalSelector($drupal_selector, $option, $message = '', $group = 'Browser') {
     $message = $message ? $message : new FormattableMarkup('Option @option for field @data_drupal_selector is selected.', ['@option' => $option, '@data_drupal_selector' => $drupal_selector]);
     $elements = $this->xpath('//select[@data-drupal-selector=:data_drupal_selector]//option[@value=:option]', [':data_drupal_selector' => $drupal_selector, ':option' => $option]);
     $this->assertNotEmpty($elements, $message);
@@ -1186,11 +1367,16 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Browser'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass.
    */
-  protected function assertNoOptionSelected($id, $option, $message = '') {
+  protected function assertNoOptionSelected($id, $option, $message = '', $group = 'Browser') {
     $message = $message ? $message : new FormattableMarkup('Option @option for field @id is not selected.', ['@option' => $option, '@id' => $id]);
     $elements = $this->xpath('//select[@id=:id]//option[@value=:option]', [':id' => $id, ':option' => $option]);
     $this->assertNotEmpty($elements, $message);
@@ -1208,12 +1394,17 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass, FALSE on fail.
    */
-  protected function assertField($field, $message = '') {
-    return $this->assertFieldByXPath($this->constructFieldXpath('name', $field) . '|' . $this->constructFieldXpath('id', $field), NULL, $message);
+  protected function assertField($field, $message = '', $group = 'Other') {
+    return $this->assertFieldByXPath($this->constructFieldXpath('name', $field) . '|' . $this->constructFieldXpath('id', $field), NULL, $message, $group);
   }
 
   /**
@@ -1226,12 +1417,17 @@ trait AssertContentTrait {
    *   messages: use \Drupal\Component\Render\FormattableMarkup to embed
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
+   * @param string $group
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    *
    * @return bool
    *   TRUE on pass, FALSE on fail.
    */
-  protected function assertNoField($field, $message = '') {
-    return $this->assertNoFieldByXPath($this->constructFieldXpath('name', $field) . '|' . $this->constructFieldXpath('id', $field), NULL, $message);
+  protected function assertNoField($field, $message = '', $group = 'Other') {
+    return $this->assertNoFieldByXPath($this->constructFieldXpath('name', $field) . '|' . $this->constructFieldXpath('id', $field), NULL, $message, $group);
   }
 
   /**
@@ -1243,7 +1439,10 @@ trait AssertContentTrait {
    *   variables in the message text, not t(). If left blank, a default message
    *   will be displayed.
    * @param string $group
-   *   Deprecated.
+   *   (optional) The group this message is in, which is displayed in a column
+   *   in test output. Use 'Debug' to indicate this is debugging output. Do not
+   *   translate this string. Defaults to 'Other'; most tests do not override
+   *   this default.
    * @param array $ids_to_skip
    *   An optional array of ids to skip when checking for duplicates. It is
    *   always a bug to have duplicate HTML IDs, so this parameter is to enable
@@ -1255,12 +1454,12 @@ trait AssertContentTrait {
    * @return bool
    *   TRUE on pass.
    */
-  protected function assertNoDuplicateIds($message = '', $group = NULL, $ids_to_skip = []) {
+  protected function assertNoDuplicateIds($message = '', $group = 'Other', $ids_to_skip = []) {
     $status = TRUE;
     foreach ($this->xpath('//*[@id]') as $element) {
       $id = (string) $element['id'];
       if (isset($seen_ids[$id]) && !in_array($id, $ids_to_skip)) {
-        $this->fail(new FormattableMarkup('The HTML ID %id is unique.', ['%id' => $id]));
+        $this->fail(new FormattableMarkup('The HTML ID %id is unique.', ['%id' => $id]), $group);
         $status = FALSE;
       }
       $seen_ids[$id] = TRUE;

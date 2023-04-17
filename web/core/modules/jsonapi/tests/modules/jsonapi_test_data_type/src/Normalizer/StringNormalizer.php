@@ -19,14 +19,14 @@ class StringNormalizer extends NormalizerBase implements DenormalizerInterface {
   /**
    * {@inheritdoc}
    */
-  public function normalize($object, $format = NULL, array $context = []): array|string|int|float|bool|\ArrayObject|NULL {
+  public function normalize($object, $format = NULL, array $context = []) {
     return str_replace('super', 'NOT', $object->getValue());
   }
 
   /**
    * {@inheritdoc}
    */
-  public function denormalize($data, $class, $format = NULL, array $context = []): mixed {
+  public function denormalize($data, $class, $format = NULL, array $context = []) {
     return str_replace('NOT', 'super', $data);
   }
 
