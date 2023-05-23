@@ -1,0 +1,19 @@
+uuid: 3a0bba3e-0427-4d9e-ab12-96ea9ac9a9cd
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.field_parking_regulation
+field_name: field_parking_regulation
+entity_type: node
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

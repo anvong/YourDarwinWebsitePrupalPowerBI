@@ -1,0 +1,82 @@
+uuid: fd62671c-db8a-40c2-9745-4c78abc05d13
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.two_column_block.field_left_content_block
+    - field.field.paragraph.two_column_block.field_right_content_block
+    - field.field.paragraph.two_column_block.layout_builder__layout
+    - paragraphs.paragraphs_type.two_column_block
+  module:
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: true
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+          column_widths: 50-50
+        components:
+          dae71563-995a-4c65-8708-c9dedc6502cf:
+            uuid: dae71563-995a-4c65-8708-c9dedc6502cf
+            region: first
+            configuration:
+              id: 'field_block:paragraph:two_column_block:field_left_content_block'
+              label: 'Left content block'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          0c67b25c-4567-42bb-8363-245b2a0c423e:
+            uuid: 0c67b25c-4567-42bb-8363-245b2a0c423e
+            region: second
+            configuration:
+              id: 'field_block:paragraph:two_column_block:field_right_content_block'
+              label: 'right content block'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+id: paragraph.two_column_block.default
+targetEntityType: paragraph
+bundle: two_column_block
+mode: default
+content:
+  field_left_content_block:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: first
+  field_right_content_block:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: first
+hidden:
+  layout_builder__layout: true

@@ -1,0 +1,19 @@
+uuid: 263bd278-d13e-4e75-8f89-829deccc9ea4
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.my_card
+    - field.storage.block_content.field_cardtitle
+id: block_content.my_card.field_cardtitle
+field_name: field_cardtitle
+entity_type: block_content
+bundle: my_card
+label: cardtitle
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

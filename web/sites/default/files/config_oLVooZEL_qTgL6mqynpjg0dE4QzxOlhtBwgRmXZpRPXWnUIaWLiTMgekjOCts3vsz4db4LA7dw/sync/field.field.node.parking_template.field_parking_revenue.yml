@@ -1,0 +1,21 @@
+uuid: 66a1896d-ed01-4181-9a38-2f2f3528574d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_parking_revenue
+    - node.type.parking_template
+  module:
+    - text
+id: node.parking_template.field_parking_revenue
+field_name: field_parking_revenue
+entity_type: node
+bundle: parking_template
+label: 'Parking Revenue'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,25 @@
+uuid: dda8379c-3aeb-4f7f-963c-75c726dcaa96
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:darwinfooter:e2faa767-a95a-41f9-b544-2f9f6ef12666'
+  module:
+    - block_content
+  theme:
+    - bootstrap_barrio_subtheme
+id: darwinfootersampleblock
+theme: bootstrap_barrio_subtheme
+region: footer_fifth
+weight: -7
+provider: null
+plugin: 'block_content:e2faa767-a95a-41f9-b544-2f9f6ef12666'
+settings:
+  id: 'block_content:e2faa767-a95a-41f9-b544-2f9f6ef12666'
+  label: 'Darwin Footer sample block'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

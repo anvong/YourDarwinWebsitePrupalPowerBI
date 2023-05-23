@@ -1,0 +1,21 @@
+uuid: 491ae58c-451f-4acd-9a77-2c9d1065c1ad
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_tags_1
+    - node.type.two_columns_page
+id: node.two_columns_page.field_tags_1
+field_name: field_tags_1
+entity_type: node
+bundle: two_columns_page
+label: tags
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings: {  }
+field_type: entity_reference

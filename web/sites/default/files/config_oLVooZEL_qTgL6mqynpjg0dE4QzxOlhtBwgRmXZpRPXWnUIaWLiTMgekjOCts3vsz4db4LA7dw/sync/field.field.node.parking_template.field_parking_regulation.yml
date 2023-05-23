@@ -1,0 +1,21 @@
+uuid: a9de114e-14b3-4d05-9af0-f746a65119bd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_parking_regulation
+    - node.type.parking_template
+  module:
+    - text
+id: node.parking_template.field_parking_regulation
+field_name: field_parking_regulation
+entity_type: node
+bundle: parking_template
+label: 'Parking Regulation'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -1,0 +1,54 @@
+uuid: 0a351d42-159e-42e4-9065-89f1e0853465
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.darwinfooter
+    - field.field.block_content.darwinfooter.body
+  module:
+    - field_layout
+    - layout_builder
+    - layout_discovery
+    - text
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
+  layout_builder:
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          3ce87a32-b6a3-4993-9201-491334e414d7:
+            uuid: 3ce87a32-b6a3-4993-9201-491334e414d7
+            region: content
+            configuration:
+              id: 'field_block:block_content:darwinfooter:body'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+id: block_content.darwinfooter.default
+targetEntityType: block_content
+bundle: darwinfooter
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

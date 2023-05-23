@@ -1,0 +1,232 @@
+uuid: bdea9c47-a305-476b-ba9f-a9994e00f57d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.parking_template.body
+    - field.field.node.parking_template.field_body_text_
+    - field.field.node.parking_template.field_paragraph
+    - field.field.node.parking_template.field_parking_financials
+    - field.field.node.parking_template.field_parking_regulation
+    - field.field.node.parking_template.field_parking_regulation_chart_b
+    - field.field.node.parking_template.field_parking_revenue
+    - field.field.node.parking_template.layout_builder__layout
+    - node.type.parking_template
+  module:
+    - entity_reference_revisions
+    - layout_builder
+    - layout_discovery
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          10a4efd4-aa5d-4463-9593-fe1001fbba40:
+            uuid: 10a4efd4-aa5d-4463-9593-fe1001fbba40
+            region: content
+            configuration:
+              id: 'extra_field_block:node:parking_template:links'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+            weight: 0
+            additional: {  }
+          1666054b-70b7-4890-9001-21130d729686:
+            uuid: 1666054b-70b7-4890-9001-21130d729686
+            region: content
+            configuration:
+              id: 'field_block:node:parking_template:body'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          f314c180-ad65-41b6-a3f4-9af1dcaf6db0:
+            uuid: f314c180-ad65-41b6-a3f4-9af1dcaf6db0
+            region: content
+            configuration:
+              id: 'field_block:node:parking_template:field_body_text_'
+              label: body-text-2
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          8cc987ed-9a1f-4460-997a-8be68782cb2c:
+            uuid: 8cc987ed-9a1f-4460-997a-8be68782cb2c
+            region: content
+            configuration:
+              id: 'field_block:node:parking_template:field_paragraph'
+              label: Paragraph
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          e1513e12-a944-4d17-9cd2-ce4b01ddc4d1:
+            uuid: e1513e12-a944-4d17-9cd2-ce4b01ddc4d1
+            region: content
+            configuration:
+              id: 'field_block:node:parking_template:field_parking_financials'
+              label: 'Parking Financials'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 4
+            additional: {  }
+          98a3fea5-d499-48ed-860b-795c46f20b16:
+            uuid: 98a3fea5-d499-48ed-860b-795c46f20b16
+            region: content
+            configuration:
+              id: 'field_block:node:parking_template:field_parking_revenue'
+              label: 'Parking Revenue'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 5
+            additional: {  }
+        third_party_settings: {  }
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+        components: {  }
+        third_party_settings: {  }
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: 'Parking Regulation section'
+          context_mapping: {  }
+        components:
+          9e277d62-8d6e-4546-88b6-eaf7d8994bcf:
+            uuid: 9e277d62-8d6e-4546-88b6-eaf7d8994bcf
+            region: content
+            configuration:
+              id: 'field_block:node:parking_template:field_parking_regulation_chart_b'
+              label: 'Parking Regulation Chart block'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_revisions_entity_view
+                label: hidden
+                settings:
+                  view_mode: default
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          65ce8b66-24af-4487-88de-8a4afb7f5732:
+            uuid: 65ce8b66-24af-4487-88de-8a4afb7f5732
+            region: content
+            configuration:
+              id: 'field_block:node:parking_template:field_parking_regulation'
+              label: 'Parking Regulation'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+id: node.parking_template.full
+targetEntityType: node
+bundle: parking_template
+mode: full
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_body_text_:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_paragraph:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_parking_financials:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_parking_revenue:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_parking_regulation: true
+  field_parking_regulation_chart_b: true
+  layout_builder__layout: true

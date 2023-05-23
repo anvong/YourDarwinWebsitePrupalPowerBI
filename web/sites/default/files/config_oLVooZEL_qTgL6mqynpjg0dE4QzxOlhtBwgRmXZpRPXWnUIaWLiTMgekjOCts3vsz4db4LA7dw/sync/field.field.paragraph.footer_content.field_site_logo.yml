@@ -1,0 +1,38 @@
+uuid: 3cc71e10-b286-477a-9d7d-71fc84ac0eb5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_site_logo
+    - paragraphs.paragraphs_type.footer_content
+  module:
+    - image
+id: paragraph.footer_content.field_site_logo
+field_name: field_site_logo
+entity_type: paragraph
+bundle: footer_content
+label: 'Site Logo'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: 418d7509-aeb8-4b9c-8036-7c15ed157c34
+    alt: ''
+    title: ''
+    width: 140
+    height: 97
+field_type: image

@@ -1,0 +1,23 @@
+uuid: 294fabf1-3055-418b-bf7d-06b2abcbfbd9
+langcode: en
+status: false
+dependencies:
+  module:
+    - search
+  theme:
+    - custom_barrio
+_core:
+  default_config_hash: A4VN9nsPpD2CTheOvM7Ma8wbl4Rz2xhvB12dua274xo
+id: custom_barrio_search_form_narrow
+theme: custom_barrio
+region: sidebar_first
+weight: -7
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: 'Search form (narrow)'
+  label_display: '0'
+  provider: search
+  page_id: ''
+visibility: {  }

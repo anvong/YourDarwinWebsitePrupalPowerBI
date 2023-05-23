@@ -1,0 +1,8 @@
+uuid: 0e8ff0e0-fc92-40a3-9638-71faa8b5b440
+langcode: en
+status: true
+dependencies: {  }
+id: darwinfooter
+label: DarwinFooter
+revision: 0
+description: ''

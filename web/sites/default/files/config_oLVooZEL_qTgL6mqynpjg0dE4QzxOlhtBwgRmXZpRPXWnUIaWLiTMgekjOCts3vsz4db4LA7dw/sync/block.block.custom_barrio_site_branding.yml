@@ -1,0 +1,25 @@
+uuid: d4aa18ca-5d18-4667-a01c-e6949c89f89a
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - custom_barrio
+_core:
+  default_config_hash: zATbINFhoA3PsUIhaSV9IpKP_hTenIfrP9adf9AeBM8
+id: custom_barrio_site_branding
+theme: custom_barrio
+region: header
+weight: -7
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: false
+  use_site_slogan: false
+visibility: {  }

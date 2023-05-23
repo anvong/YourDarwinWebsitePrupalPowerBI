@@ -1,0 +1,21 @@
+uuid: 76b25ae3-8ad3-49a8-9c46-9f150cf44725
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_parking_financials
+    - node.type.parking_template
+  module:
+    - text
+id: node.parking_template.field_parking_financials
+field_name: field_parking_financials
+entity_type: node
+bundle: parking_template
+label: 'Parking Financials'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

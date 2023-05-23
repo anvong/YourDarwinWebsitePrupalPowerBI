@@ -1,0 +1,14 @@
+_core:
+  default_config_hash: VDJxTZtQR21qB4lvOq8zszJZLvLKrSPQpdn2E3T71Ww
+langcode: en
+uuid: acc2d4b1-f815-4fba-8dc7-557e73c9fd82
+name: 'Your Darwin City'
+mail: admin@mydarwin.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node/7
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: en

@@ -1,0 +1,8 @@
+uuid: c8d4ffc1-bfa8-4624-9610-681e94bb28df
+langcode: en
+status: true
+dependencies: {  }
+id: my_card
+label: 'My Card'
+revision: 0
+description: ''

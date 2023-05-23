@@ -1,0 +1,34 @@
+uuid: 635d72cc-ef00-433e-9841-87df70b51337
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_paragraph
+    - node.type.parking_template
+    - paragraphs.paragraphs_type.two_column_block
+  module:
+    - entity_reference_revisions
+id: node.parking_template.field_paragraph
+field_name: field_paragraph
+entity_type: node
+bundle: parking_template
+label: Paragraph
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      two_column_block: two_column_block
+    negate: 0
+    target_bundles_drag_drop:
+      footer_content:
+        weight: 4
+        enabled: false
+      two_column_block:
+        weight: 3
+        enabled: true
+field_type: entity_reference_revisions

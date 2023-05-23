@@ -1,0 +1,21 @@
+uuid: cca2e342-9e61-4006-997a-c2d60bef4058
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.layout_builder__layout
+    - paragraphs.paragraphs_type.two_column_block
+  module:
+    - layout_builder
+id: paragraph.two_column_block.layout_builder__layout
+field_name: layout_builder__layout
+entity_type: paragraph
+bundle: two_column_block
+label: Layout
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: layout_section

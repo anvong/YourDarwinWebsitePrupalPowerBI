@@ -1,0 +1,25 @@
+uuid: e87dfe32-26ee-4abf-9f4c-e4319e7e54a4
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:b0565531-ef03-4b5c-a3ad-5c4693e37c5d'
+  module:
+    - block_content
+  theme:
+    - custom_barrio
+id: custom_barrio_footercopyright
+theme: custom_barrio
+region: footer_fifth
+weight: 0
+provider: null
+plugin: 'block_content:b0565531-ef03-4b5c-a3ad-5c4693e37c5d'
+settings:
+  id: 'block_content:b0565531-ef03-4b5c-a3ad-5c4693e37c5d'
+  label: 'Footer: Copyright'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

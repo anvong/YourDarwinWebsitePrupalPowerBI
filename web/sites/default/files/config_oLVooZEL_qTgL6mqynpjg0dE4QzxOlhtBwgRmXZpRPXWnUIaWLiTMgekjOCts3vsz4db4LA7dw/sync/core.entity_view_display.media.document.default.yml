@@ -1,0 +1,62 @@
+uuid: 30f78420-f0f0-4b61-bf7c-45597bad3a8c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.document.field_media_document
+    - media.type.document
+  module:
+    - field_layout
+    - file
+    - layout_builder
+    - layout_discovery
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
+  layout_builder:
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          097b5276-f08c-40a2-b4c9-6c5e03a1599d:
+            uuid: 097b5276-f08c-40a2-b4c9-6c5e03a1599d
+            region: content
+            configuration:
+              id: 'field_block:media:document:field_media_document'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: file_default
+                label: visually_hidden
+                settings:
+                  use_description_as_link_text: true
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+_core:
+  default_config_hash: XxUyhaTuM0OUUZpr8G6jdrFBEh5eag7auWxBKhm6cvY
+id: media.document.default
+targetEntityType: media
+bundle: document
+mode: default
+content:
+  field_media_document:
+    type: file_default
+    label: visually_hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  created: true
+  name: true
+  thumbnail: true
+  uid: true

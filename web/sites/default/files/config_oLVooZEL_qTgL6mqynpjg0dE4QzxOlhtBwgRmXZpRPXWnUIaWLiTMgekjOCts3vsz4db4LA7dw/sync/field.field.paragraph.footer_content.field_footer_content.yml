@@ -1,0 +1,24 @@
+uuid: 5416c17f-fdc2-4ce3-9b4b-16a00b726384
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_footer_content
+    - paragraphs.paragraphs_type.footer_content
+  module:
+    - text
+id: paragraph.footer_content.field_footer_content
+field_name: field_footer_content
+entity_type: paragraph
+bundle: footer_content
+label: 'Footer Content'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '<ul class="contact-info" style="-webkit-text-stroke-width:0px;background-color:rgb(255, 255, 255);box-sizing:border-box;color:rgb(4, 66, 123);font-family:fira-sans, sans-serif;font-size:16px;font-style:normal;font-variant-caps:normal;font-variant-ligatures:normal;font-weight:400;letter-spacing:normal;list-style:disc;margin:0px 0px 3.5em;orphans:2;padding:0px;text-align:start;text-decoration-color:initial;text-decoration-style:initial;text-decoration-thickness:initial;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;"><li class="phone" style="box-sizing:border-box;list-style:none;margin-bottom:0.8em;"><strong style="box-sizing:border-box;margin-right:0.3em;">PH</strong><a style="background:transparent;box-sizing:border-box;color:rgb(4, 66, 123);font-size:16px;text-decoration:none;transition:all 0.3s ease 0s;" href="tel:0889300300">08 8930 0300</a></li><li class="phone" style="box-sizing:border-box;list-style:none;margin-bottom:0.8em;"><strong style="box-sizing:border-box;margin-right:0.3em;">AH</strong><a style="background:transparent;box-sizing:border-box;color:rgb(4, 66, 123);font-size:16px;text-decoration:none;transition:all 0.3s ease 0s;" href="tel:89892843">08 8989 2843</a></li><li class="mail" style="box-sizing:border-box;list-style:none;margin-bottom:0.8em;"><a style="background:transparent;box-sizing:border-box;color:rgb(4, 66, 123);font-size:16px;text-decoration:none;transition:all 0.3s ease 0s;" href="mailto:darwin@darwin.nt.gov.au">darwin@darwin.nt.gov.au</a></li><li class="adress" style="box-sizing:border-box;list-style:none;margin-bottom:0.8em;">GPO Box 84, Darwin NT 0801</li><li class="map" style="box-sizing:border-box;list-style:none;margin-bottom:0.8em;"><a style="background:transparent;box-sizing:border-box;color:rgb(4, 66, 123);font-size:16px;text-decoration:none;transition:all 0.3s ease 0s;" href="https://www.google.com.au/maps/place/Harry+Chan+Ave,+Darwin+City+NT+0800/data=!4m2!3m1!1s0x2cc09105097db561:0xc8349979a5be1ba9?sa=X&amp;sqi=2&amp;ved=0ahUKEwiavsnfzujPAhUX8mMKHU3cA-0Q8gEIIDAB" rel="noopener" target="_blank">Harry&nbsp;Chan Avenue&nbsp;Darwin NT 0800</a></li><li style="box-sizing:border-box;list-style:none;margin-bottom:0.8em;">ABN&nbsp;11 503 313 301</li></ul>'
+    format: full_html
+default_value_callback: ''
+settings: {  }
+field_type: text_long

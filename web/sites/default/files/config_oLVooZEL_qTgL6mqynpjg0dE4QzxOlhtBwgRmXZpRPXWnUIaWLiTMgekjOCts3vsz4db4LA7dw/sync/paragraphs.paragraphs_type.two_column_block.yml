@@ -1,0 +1,10 @@
+uuid: 425b9a0f-f41e-4177-aff7-b7b73af64206
+langcode: en
+status: true
+dependencies: {  }
+id: two_column_block
+label: 'two column block'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

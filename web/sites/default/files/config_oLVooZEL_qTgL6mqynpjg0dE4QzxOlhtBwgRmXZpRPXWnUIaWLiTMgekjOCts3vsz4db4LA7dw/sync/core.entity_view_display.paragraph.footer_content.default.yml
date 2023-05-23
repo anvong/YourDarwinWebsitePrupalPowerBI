@@ -1,0 +1,86 @@
+uuid: 91bbc4cb-9447-43b2-b973-80deb07c79fa
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.footer_content.field_footer_content
+    - field.field.paragraph.footer_content.field_site_logo
+    - paragraphs.paragraphs_type.footer_content
+  module:
+    - field_layout
+    - image
+    - layout_builder
+    - layout_discovery
+    - text
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
+  layout_builder:
+    enabled: true
+    sections:
+      -
+        layout_id: layout_onecol
+        layout_settings:
+          label: ''
+        components:
+          6d241965-6ea7-42da-9706-d185a7d0a084:
+            uuid: 6d241965-6ea7-42da-9706-d185a7d0a084
+            region: content
+            configuration:
+              id: 'field_block:paragraph:footer_content:field_site_logo'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: image
+                label: hidden
+                settings:
+                  image_link: ''
+                  image_style: ''
+                  image_loading:
+                    attribute: lazy
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          9309ba48-e48b-4390-9741-cee82515304a:
+            uuid: 9309ba48-e48b-4390-9741-cee82515304a
+            region: content
+            configuration:
+              id: 'field_block:paragraph:footer_content:field_footer_content'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+        third_party_settings: {  }
+id: paragraph.footer_content.default
+targetEntityType: paragraph
+bundle: footer_content
+mode: default
+content:
+  field_footer_content:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_site_logo:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

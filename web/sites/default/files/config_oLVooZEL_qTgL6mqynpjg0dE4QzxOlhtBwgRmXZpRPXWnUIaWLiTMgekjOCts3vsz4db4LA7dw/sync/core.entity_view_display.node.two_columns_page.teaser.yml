@@ -1,0 +1,36 @@
+uuid: b6d93673-a55f-4698-9399-3bd8697d0411
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.two_columns_page.body
+    - field.field.node.two_columns_page.field_body2
+    - field.field.node.two_columns_page.field_tags_1
+    - field.field.node.two_columns_page.layout_builder__layout
+    - node.type.two_columns_page
+  module:
+    - text
+    - user
+id: node.two_columns_page.teaser
+targetEntityType: node
+bundle: two_columns_page
+mode: teaser
+content:
+  body:
+    type: text_summary_or_trimmed
+    label: hidden
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_body2: true
+  field_tags_1: true
+  layout_builder__layout: true

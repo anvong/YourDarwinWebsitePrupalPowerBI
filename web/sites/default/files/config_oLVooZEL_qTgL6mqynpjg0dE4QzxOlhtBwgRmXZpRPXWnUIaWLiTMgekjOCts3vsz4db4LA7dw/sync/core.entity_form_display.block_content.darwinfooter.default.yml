@@ -1,0 +1,40 @@
+uuid: 042fd87b-c600-464d-8162-eb0fe2e89018
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.darwinfooter
+    - field.field.block_content.darwinfooter.body
+  module:
+    - field_layout
+    - layout_discovery
+    - text
+third_party_settings:
+  field_layout:
+    id: layout_onecol
+    settings:
+      label: ''
+id: block_content.darwinfooter.default
+targetEntityType: block_content
+bundle: darwinfooter
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 26
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  info:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

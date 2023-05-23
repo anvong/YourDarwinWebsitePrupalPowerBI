@@ -1,0 +1,85 @@
+uuid: 434094ee-ce5c-4e8e-b988-5ac527b269ea
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.full
+    - field.field.node.two_columns_page.body
+    - field.field.node.two_columns_page.field_body2
+    - field.field.node.two_columns_page.field_tags_1
+    - field.field.node.two_columns_page.layout_builder__layout
+    - node.type.two_columns_page
+  module:
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: true
+    sections:
+      -
+        layout_id: layout_twocol_section
+        layout_settings:
+          label: ''
+          context_mapping: {  }
+          column_widths: 50-50
+        components:
+          c61a4911-a1cf-4261-a664-dd6c10a19f6f:
+            uuid: c61a4911-a1cf-4261-a664-dd6c10a19f6f
+            region: first
+            configuration:
+              id: 'field_block:node:two_columns_page:body'
+              label: Body
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          7d6a3a82-c1b7-4501-986b-535299352154:
+            uuid: 7d6a3a82-c1b7-4501-986b-535299352154
+            region: second
+            configuration:
+              id: 'field_block:node:two_columns_page:field_body2'
+              label: body2
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: above
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+id: node.two_columns_page.full
+targetEntityType: node
+bundle: two_columns_page
+mode: full
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_body2: true
+  field_tags_1: true
+  layout_builder__layout: true

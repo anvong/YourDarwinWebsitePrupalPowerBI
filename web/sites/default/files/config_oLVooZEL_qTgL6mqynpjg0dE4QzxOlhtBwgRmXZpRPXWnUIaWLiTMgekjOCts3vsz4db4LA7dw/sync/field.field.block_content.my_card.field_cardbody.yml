@@ -1,0 +1,21 @@
+uuid: e0ca4631-8f2d-4287-a160-2528cf2a3577
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.my_card
+    - field.storage.block_content.field_cardbody
+  module:
+    - text
+id: block_content.my_card.field_cardbody
+field_name: field_cardbody
+entity_type: block_content
+bundle: my_card
+label: cardbody
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

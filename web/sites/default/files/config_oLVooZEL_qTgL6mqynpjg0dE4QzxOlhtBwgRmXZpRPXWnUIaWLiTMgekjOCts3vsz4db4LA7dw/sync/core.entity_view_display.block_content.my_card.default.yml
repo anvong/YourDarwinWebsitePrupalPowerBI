@@ -1,0 +1,67 @@
+uuid: 61fe25e3-82ab-4b97-93e8-198e22064afe
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.my_card
+    - field.field.block_content.my_card.field_cardbody
+    - field.field.block_content.my_card.field_cardimage
+    - field.field.block_content.my_card.field_cardtitle
+  module:
+    - ds
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+  ds:
+    layout:
+      id: barrio_cardbasic
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        classes: {  }
+        wrappers:
+          first: div
+        outer_wrapper: div
+        attributes: ''
+        link_attribute: ''
+        link_custom: ''
+    regions:
+      first:
+        - field_cardimage
+        - field_cardtitle
+        - field_cardbody
+id: block_content.my_card.default
+targetEntityType: block_content
+bundle: my_card
+mode: default
+content:
+  field_cardbody:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_cardimage:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_cardtitle:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  layout_builder__layout: true

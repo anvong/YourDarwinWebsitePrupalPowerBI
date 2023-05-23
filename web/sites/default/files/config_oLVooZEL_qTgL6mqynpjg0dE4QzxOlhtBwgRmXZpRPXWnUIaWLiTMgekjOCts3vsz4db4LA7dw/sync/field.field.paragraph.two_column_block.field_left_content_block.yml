@@ -1,0 +1,21 @@
+uuid: f223c111-2664-4cf0-80eb-bf9df7065803
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_left_content_block
+    - paragraphs.paragraphs_type.two_column_block
+  module:
+    - text
+id: paragraph.two_column_block.field_left_content_block
+field_name: field_left_content_block
+entity_type: paragraph
+bundle: two_column_block
+label: 'Left content block'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

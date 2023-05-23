@@ -1,0 +1,21 @@
+uuid: 5caeebd4-31dc-465e-81e8-326afb4c55e0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_body_text_
+    - node.type.parking_template
+  module:
+    - text
+id: node.parking_template.field_body_text_
+field_name: field_body_text_
+entity_type: node
+bundle: parking_template
+label: body-text-2
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long
