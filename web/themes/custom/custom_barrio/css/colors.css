@@ -105,6 +105,7 @@ a:active,
   color: #fffeff;
 }
 
+
 /* -- Custom Element--*/
 .py-5 {
   padding-top: 3rem !important;
@@ -133,3 +134,20 @@ background-size: cover;
   right: -20px;
   left: 0;
 }
+
+.dropdown-menu li a  /* Remove underline from links */
+  {
+    text-decoration: none;
+    /* background-color: red; */
+  }
+.dropdown-menu .active  /* Remove underline from links */
+{
+  text-decoration: none;
+  background-color:#006fba; 
+  color: #fff;
+}
+/* .dropdown-item:hover {
+  color: #fff;
+  background-color: #006fba;
+} */
+
